@@ -160,6 +160,8 @@
                         <div class="card-body">
                             <form class="needs-validation">
 
+                                <legend>INFORMATION</legend>
+
                                 <div class="mb-3">
                                     <label for="selectLGU" class="form-label">LGU</label>
                                     <select class="form-select custom-select form-control form-control" aria-label="selectLGU" required>
@@ -181,6 +183,8 @@
                                     </select>
                                 </div>
 
+                                <legend>ITEM</legend>
+
                                 <div class="mb-3">
                                     <label for="inputItemNo" class="form-label">Item No.</label>
                                     <input type="text" class="form-control" id="inputItemNo" required>
@@ -193,7 +197,7 @@
 
                                 <div class="mb-3">
                                     <label for="inputDescription" class="form-label">Item Description</label>
-                                    <input type="text" class="form-control" id="inputDescription" required>
+                                    <textarea type="text" class="form-control" id="inputDescription" required></textarea>
                                 </div>
                                 
                                 <div class="mb-3">
@@ -206,15 +210,19 @@
                                     <input type="text" class="form-control" id="inputUnitCost" required>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="inputTotalCost" class="form-label">Total Cost</label>
-                                    <input type="text" class="form-control" id="inputTotalCost" required>
-                                </div>
+                                <fieldset disabled>
+                                    <div class="mb-3">
+                                        <label for="inputTotalCost" class="form-label">Total Cost</label>
+                                        <input type="text" class="form-control" id="inputTotalCost" required>
+                                    </div>
+                                </fieldset>
 
                                 <div class="mb-3">
                                     <label for="inputPurpose" class="form-label">Purpose</label>
                                     <textarea type="text" class="form-control" id="inputPurpose" required></textarea>
                                 </div>
+
+                                <button type="button" class="btn btn-primary" id="button" onclick="addItem()">Add Another Item</button>
 
                             </form>
                         </div>
