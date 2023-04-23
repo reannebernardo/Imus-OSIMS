@@ -50,7 +50,7 @@
                     <i class="fas fa-solid fa-file"></i>
                     <span>Purchase Requests</span></a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="purchase_orders.html">
                     <i class="fas fa-solid fa-file"></i>
                     <span>Purchase Orders</span></a>
@@ -73,7 +73,7 @@
                 Administration
             </div>
 
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="suppliers.html">
                     <i class="fas fa-solid fa-truck"></i>
                     <span>Suppliers</span></a>
@@ -149,111 +149,42 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Purchase Orders</h1>
-                    <p class="mb-4">The PO is a form/document used by the agency/entity, addressed to a supplier, to deliver specific quantities of supplies/goods/property subject to the terms and conditions contained in the PO.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Suppliers</h1>
+                    <p class="mb-4"></p>
 
-                    <!-- DataTales Example -->
+                    <!-- Add Supplier Form-->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
-                            <a href="create_po.html" class="btn btn-success" role="button">Create Purchase Order</a>
+                            <h6 class="m-0 font-weight-bold text-primary">Add Supplier</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>PO No.</th>
-                                            <th>LGU</th>
-                                            <th>Stock No.</th>
-                                            <th>Supplier</th>
-                                            <th>PO Date</th>
-                                            <th>Mode of Procurement</th>
-                                            <th>PR No.</th>
-                                            <th>Place of Delivery</th>
-                                            <th>Date of Delivery</th>
-                                            <th>Delivery Term</th>
-                                            <th>Payment Term</th>
-                                            <th>Amount</th>
-                                            <th>Date Signed</th>
-                                            <th>Date Requested</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <!-- <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot> -->
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <form class="needs-validation">
+
+                                <div class="mb-3">
+                                    <label for="inputName" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="inputName" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputAddress" class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="inputAddress" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputTIN" class="form-label">TIN</label>
+                                    <input type="text" class="form-control" id="inputTIN" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputProducts" class="form-label">Products</label>
+                                    <input type="text" class="form-control" id="inputProducts" required>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-secondary" href="suppliers.html">Cancel</a>
+                            <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </div>
 
