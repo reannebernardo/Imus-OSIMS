@@ -183,46 +183,51 @@
                                     </select>
                                 </div>
 
-                                <legend>ITEM</legend>
+                                <div class="itemGroup">
 
-                                <div class="mb-3">
-                                    <label for="inputItemNo" class="form-label">Item No.</label>
-                                    <input type="text" class="form-control" id="inputItemNo" required>
-                                </div>
+                                    <hr class="divider d-none d-sm-block"></hr>
 
-                                <div class="mb-3">
-                                    <label for="inputUnit" class="form-label">Unit</label>
-                                    <input type="text" class="form-control" id="inputUnit" required>
-                                </div>
+                                    <legend>ITEM</legend>
 
-                                <div class="mb-3">
-                                    <label for="inputDescription" class="form-label">Item Description</label>
-                                    <textarea type="text" class="form-control" id="inputDescription" required></textarea>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="inputQuantity" class="form-label">Quantity</label>
-                                    <input type="text" class="form-control" id="inputQuantity" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="inputUnitCost" class="form-label">Unit Cost</label>
-                                    <input type="text" class="form-control" id="inputUnitCost" required>
-                                </div>
-
-                                <fieldset disabled>
                                     <div class="mb-3">
-                                        <label for="inputTotalCost" class="form-label">Total Cost</label>
-                                        <input type="text" class="form-control" id="inputTotalCost" required>
+                                        <label for="inputItemNo" class="form-label">Item No.</label>
+                                        <input type="text" class="form-control" id="inputItemNo" required>
                                     </div>
-                                </fieldset>
 
-                                <div class="mb-3">
-                                    <label for="inputPurpose" class="form-label">Purpose</label>
-                                    <textarea type="text" class="form-control" id="inputPurpose" required></textarea>
+                                    <div class="mb-3">
+                                        <label for="inputUnit" class="form-label">Unit</label>
+                                        <input type="text" class="form-control" id="inputUnit" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="inputDescription" class="form-label">Item Description</label>
+                                        <textarea type="text" class="form-control" id="inputDescription" required></textarea>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="inputQuantity" class="form-label">Quantity</label>
+                                        <input type="text" class="form-control" id="inputQuantity" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="inputUnitCost" class="form-label">Unit Cost</label>
+                                        <input type="text" class="form-control" id="inputUnitCost" required>
+                                    </div>
+
+                                    <fieldset disabled>
+                                        <div class="mb-3">
+                                            <label for="inputTotalCost" class="form-label">Total Cost</label>
+                                            <input type="text" class="form-control" id="inputTotalCost" required>
+                                        </div>
+                                    </fieldset>
+
+                                    <div class="mb-3">
+                                        <label for="inputPurpose" class="form-label">Purpose</label>
+                                        <textarea type="text" class="form-control" id="inputPurpose" required></textarea>
+                                    </div>
+
                                 </div>
-
-                                <button type="button" class="btn btn-primary" id="button" onclick="addItem()">Add Another Item</button>
+                                <a href="#" class="btn btn-primary" id="addItem">Add Another Item</a>
 
                             </form>
                         </div>
