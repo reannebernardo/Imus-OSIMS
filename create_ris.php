@@ -29,7 +29,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <!-- <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div> -->
@@ -41,27 +41,27 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="purchase_requests.html">
+                <a class="nav-link" href="purchase_requests.php">
                     <i class="fas fa-solid fa-file"></i>
                     <span>Purchase Requests</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="purchase_orders.html">
+                <a class="nav-link" href="purchase_orders.php">
                     <i class="fas fa-solid fa-file"></i>
                     <span>Purchase Orders</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="stock_cards.html">
+                <a class="nav-link" href="stock_cards.php">
                     <i class="fas fa-solid fa-box"></i>
                     <span>Stock Cards</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="ris.html">
+            <li class="nav-item active">
+                <a class="nav-link" href="ris.php">
                     <i class="fas fa-solid fa-file"></i>
                     <span>Requisition and Issuance</span></a>
             </li>
@@ -74,22 +74,22 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="suppliers.html">
+                <a class="nav-link" href="suppliers.php">
                     <i class="fas fa-solid fa-truck"></i>
                     <span>Suppliers</span></a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="warehouses.html">
+            <li class="nav-item">
+                <a class="nav-link" href="warehouses.php">
                     <i class="fas fa-solid fa-warehouse"></i>
                     <span>Warehouses</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="report.html">
+                <a class="nav-link" href="report.php">
                     <i class="fas fa-solid fa-chart-line"></i>
                     <span>Generate Report</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="users.html">
+            <li class="nav-item">
+                <a class="nav-link" href="users.php">
                     <i class="fas fa-solid fa-users"></i>
                     <span>Users</span></a>
             </li>
@@ -148,12 +148,79 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- 404 Error Text -->
-                    <div class="text-center">
-                        <div class="error mx-auto" data-text="404">404</div>
-                        <p class="lead text-gray-800 mb-5">Page Not Found</p>
-                        <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
-                        <a href="index.html">&larr; Back to Dashboard</a>
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Requisition and Issuance</h1>
+                    <p class="mb-4">The RIS shall be used by the <b>Requisitioning Division/Office</b> to request supplies/goods/ equipment/property carried in stock and by the <b>Supply and/or Property Division/Unit</b> to issue the item/s requested.</p>
+
+                    <!-- Create RIS Form-->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Create RIS</h6>
+                        </div>
+                        <div class="card-body">
+                            <form class="needs-validation">
+
+                                <legend>INFORMATION</legend>
+
+                                <div class="mb-3">
+                                    <label for="selectLGU" class="form-label">LGU</label>
+                                    <select class="form-select custom-select form-control form-control" aria-label="selectLGU" required>
+                                        <option selected>Select LGU</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="selectOffice" class="form-label">Office</label>
+                                    <select class="form-select custom-select form-control form-control" aria-label="selectOffice" required>
+                                        <option selected>Select Office</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                                
+                                <hr class="divider d-none d-sm-block"></hr>
+
+                                <legend>REQUISITION</legend>
+
+                                <div class="mb-3">
+                                    <label for="inputStockNo" class="form-label">Stock No.</label>
+                                    <input type="text" class="form-control" id="inputStockNo" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputUnit" class="form-label">Unit</label>
+                                    <input type="text" class="form-control" id="inputUnit" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputDescription" class="form-label">Item Description</label>
+                                    <input type="text" class="form-control" id="inputDescription" required>
+                                </div>
+
+                                <hr class="divider d-none d-sm-block"></hr>
+
+                                <legend>ISSUANCE</legend>
+
+                                <div class="mb-3">
+                                    <label for="inputQuantity" class="form-label">Quantity</label>
+                                    <input type="text" class="form-control" id="inputQuantity" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputRemarks" class="form-label">Remarks</label>
+                                    <textarea type="text" class="form-control" id="inputUnitCost" required></textarea>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-secondary" href="ris.php">Cancel</a>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
                     </div>
 
                 </div>
@@ -197,7 +264,7 @@
                 <div class="modal-body">Click "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="login.php">Logout</a>
                 </div>
             </div>
         </div>

@@ -50,11 +50,11 @@
                                             <input type="password" class="form-control form-control-user"
                                                 id="inputPassword" placeholder="Enter Password">
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block"> Login</a>
+                                        <a href="index.php" class="btn btn-primary btn-user btn-block"> Login</a>
                                     </form>
                                     <hr>
                                     <div class="text-center mb-2">
-                                        <a class="" href="forgot-password.html">Forgot Password?</a>
+                                        <a class="" href="forgot-password.php">Forgot Password?</a>
                                     </div>
                                     <div class="text-center small">
                                         <span>Don't have an account? Contact your admin for access</span>

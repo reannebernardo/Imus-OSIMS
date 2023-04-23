@@ -15,6 +15,8 @@
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- DateTime Picker-->
+    <link rel="" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-  datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
@@ -29,7 +31,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <!-- <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div> -->
@@ -41,27 +43,27 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="purchase_requests.html">
+                <a class="nav-link" href="purchase_requests.php">
                     <i class="fas fa-solid fa-file"></i>
                     <span>Purchase Requests</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="purchase_orders.html">
+            <li class="nav-item active">
+                <a class="nav-link" href="purchase_orders.php">
                     <i class="fas fa-solid fa-file"></i>
                     <span>Purchase Orders</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="stock_cards.html">
+                <a class="nav-link" href="stock_cards.php">
                     <i class="fas fa-solid fa-box"></i>
                     <span>Stock Cards</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="ris.html">
+                <a class="nav-link" href="ris.php">
                     <i class="fas fa-solid fa-file"></i>
                     <span>Requisition and Issuance</span></a>
             </li>
@@ -74,22 +76,22 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="suppliers.html">
+                <a class="nav-link" href="suppliers.php">
                     <i class="fas fa-solid fa-truck"></i>
                     <span>Suppliers</span></a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="warehouses.html">
+            <li class="nav-item">
+                <a class="nav-link" href="warehouses.php">
                     <i class="fas fa-solid fa-warehouse"></i>
                     <span>Warehouses</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="report.html">
+                <a class="nav-link" href="report.php">
                     <i class="fas fa-solid fa-chart-line"></i>
                     <span>Generate Report</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="users.html">
+            <li class="nav-item">
+                <a class="nav-link" href="users.php">
                     <i class="fas fa-solid fa-users"></i>
                     <span>Users</span></a>
             </li>
@@ -149,43 +151,111 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Users</h1>
-                    <p class="mb-4"></p>
+                    <h1 class="h3 mb-2 text-gray-800">Purchase Order</h1>
+                    <p class="mb-4">The PO is a form/document used by the agency/entity, addressed to a supplier, to deliver specific quantities of supplies/goods/property subject to the terms and conditions contained in the PO.</p>
 
-                    <!-- Add User Form-->
+                    <!-- Create PO Form-->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Add User</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Create Purchase Order</h6>
                         </div>
                         <div class="card-body">
                             <form class="needs-validation">
 
-                                <div class="mb-3">
-                                    <label for="inputName" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="inputName" required>
-                                </div>
+                                <legend>INFORMATION</legend>
 
                                 <div class="mb-3">
-                                    <label for="inputEmail" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="inputEmail" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="selectRole" class="form-label">Role</label>
-                                    <select class="form-select custom-select form-control form-control" aria-label="selectRole" required>
-                                        <option selected>Select Role</option>
-                                        <option value="1">Supply Custodian</option>
-                                        <option value="3">Supply Division Approver</option>
-                                        <option value="3">Supplier</option>
-                                        <option value="3">Supply Division</option>
-                                        <option value="2">Admin</option>
+                                    <label for="selectSupplier" class="form-label">Supplier</label>
+                                    <select class="form-select custom-select form-control form-control" aria-label="selectSupplier" required>
+                                        <option selected>Select Supplier</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
                                     </select>
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="selectMOP" class="form-label">Mode of Procurement</label>
+                                    <select class="form-select custom-select form-control form-control" aria-label="selectMOP" required>
+                                        <option selected>Select Mode of Procurement</option>
+                                        <option value="1">Procurement Service</option>
+                                        <option value="3">Limited Source Bidding</option>
+                                        <option value="3">Direct Contracting</option>
+                                        <option value="3">Negotiated Procurement</option>
+                                        <option value="3">Repeat Order</option>
+                                        <option value="2">Shopping</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputPRNos" class="form-label">PR No./s</label>
+                                    <input type="text" class="form-control" id="inputPRNos" required>
+                                </div>
+                                
+                                <hr class="divider d-none d-sm-block"></hr>
+
+                                <legend>DELIVERY</legend>
+
+                                <div class="mb-3">
+                                    <label for="inputPlaceOfDelivery" class="form-label">Place of Delivery</label>
+                                    <input type="text" class="form-control" id="inputPlaceOfDelivery" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputDateOfDelivery" class="form-label">Date of Delivery</label>
+                                    <input type="date" class="form-control" id="inputDateOfDelivery" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputDeliveryTerm" class="form-label">Delivery Term</label>
+                                    <input type="text" class="form-control" id="inputDeliveryTerm" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="selectPT" class="form-label">Payment Term</label>
+                                    <select class="form-select custom-select form-control form-control" aria-label="selectPT" required>
+                                        <option selected>Select Payment Term</option>
+                                        <option value="1">FOB shipping point</option>
+                                        <option value="2">FOB destination</option>
+                                    </select>
+                                </div>
+
+                                <hr class="divider d-none d-sm-block"></hr>
+
+                                <legend>ITEM</legend>
+
+                                <div class="mb-3">
+                                    <label for="inputUnit" class="form-label">Unit</label>
+                                    <input type="text" class="form-control" id="inputUnit" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputDescription" class="form-label">Item Description</label>
+                                    <textarea type="text" class="form-control" id="inputDescription" required></textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="inputQuantity" class="form-label">Quantity</label>
+                                    <input type="text" class="form-control" id="inputQuantity" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputUnitCost" class="form-label">Unit Cost</label>
+                                    <input type="text" class="form-control" id="inputUnitCost" required>
+                                </div>
+                                <fieldset disabled>
+                                    <div class="mb-3">
+                                        <label for="inputTotalCost" class="form-label">Amount</label>
+                                        <input type="text" class="form-control" id="inputTotalCost" required>
+                                    </div>
+                                </fieldset>
+
+                                <a href="#" class="btn btn-primary" id="addItem">Add Another Item</a>
 
                             </form>
                         </div>
                         <div class="card-footer">
-                            <a class="btn btn-secondary" href="users.html">Cancel</a>
+                            <a class="btn btn-secondary" href="purchase_orders.php">Cancel</a>
                             <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </div>
@@ -231,7 +301,7 @@
                 <div class="modal-body">Click "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="login.php">Logout</a>
                 </div>
             </div>
         </div>

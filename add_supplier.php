@@ -29,7 +29,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <!-- <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div> -->
@@ -41,27 +41,27 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="purchase_requests.html">
+                <a class="nav-link" href="purchase_requests.php">
                     <i class="fas fa-solid fa-file"></i>
                     <span>Purchase Requests</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="purchase_orders.html">
+                <a class="nav-link" href="purchase_orders.php">
                     <i class="fas fa-solid fa-file"></i>
                     <span>Purchase Orders</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="stock_cards.html">
+                <a class="nav-link" href="stock_cards.php">
                     <i class="fas fa-solid fa-box"></i>
                     <span>Stock Cards</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="ris.html">
+                <a class="nav-link" href="ris.php">
                     <i class="fas fa-solid fa-file"></i>
                     <span>Requisition and Issuance</span></a>
             </li>
@@ -73,23 +73,23 @@
                 Administration
             </div>
 
-            <li class="nav-item">
-                <a class="nav-link" href="suppliers.html">
+            <li class="nav-item active">
+                <a class="nav-link" href="suppliers.php">
                     <i class="fas fa-solid fa-truck"></i>
                     <span>Suppliers</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="warehouses.html">
+            <li class="nav-item">
+                <a class="nav-link" href="warehouses.php">
                     <i class="fas fa-solid fa-warehouse"></i>
                     <span>Warehouses</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="report.html">
+                <a class="nav-link" href="report.php">
                     <i class="fas fa-solid fa-chart-line"></i>
                     <span>Generate Report</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="users.html">
+                <a class="nav-link" href="users.php">
                     <i class="fas fa-solid fa-users"></i>
                     <span>Users</span></a>
             </li>
@@ -149,60 +149,41 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Warehouses</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Suppliers</h1>
                     <p class="mb-4"></p>
 
-                    <!-- Add Warehouse Form-->
+                    <!-- Add Supplier Form-->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Add Warehouse</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Add Supplier</h6>
                         </div>
                         <div class="card-body">
                             <form class="needs-validation">
 
-                                <legend>WAREHOUSE</legend>
-
                                 <div class="mb-3">
-                                    <label for="inputName" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="inputName" required>
+                                    <label for="inputCompanyName" class="form-label">Company Name</label>
+                                    <input type="text" class="form-control" id="inputCompanyName" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="inputAddress" class="form-label">Address</label>
                                     <input type="text" class="form-control" id="inputAddress" required>
                                 </div>
-                                
-                                <div class="mb-3">
-                                    <label for="inputRemainingCap" class="form-label">Remaining Capacity</label>
-                                    <input type="text" class="form-control" id="inputRemainingCap" required>
-                                </div>
-                                
-                                <hr class="divider d-none d-sm-block"></hr>
-
-                                <legend>MANAGER</legend>
-
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">First Name</span>
-                                    <input type="text" aria-label="First Name" class="form-control">
-                                    <span class="input-group-text">Last Name</span>
-                                    <input type="text" aria-label="Last Name" class="form-control">
-                                  </div>
 
                                 <div class="mb-3">
-                                    <label for="inputPhone" class="form-label">Phone</label>
-                                    <input type="text" class="form-control" id="inputPhone" required>
+                                    <label for="inputTIN" class="form-label">TIN</label>
+                                    <input type="text" class="form-control" id="inputTIN" required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="inputEmail" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="inputEmail" required>
+                                    <label for="inputProducts" class="form-label">Products</label>
+                                    <input type="text" class="form-control" id="inputProducts" required>
                                 </div>
-
 
                             </form>
                         </div>
                         <div class="card-footer">
-                            <a class="btn btn-secondary" href="warehouses.html">Cancel</a>
+                            <a class="btn btn-secondary" href="suppliers.php">Cancel</a>
                             <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </div>
@@ -248,7 +229,7 @@
                 <div class="modal-body">Click "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="login.php">Logout</a>
                 </div>
             </div>
         </div>

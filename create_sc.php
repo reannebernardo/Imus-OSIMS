@@ -29,7 +29,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <!-- <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div> -->
@@ -41,27 +41,27 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="purchase_requests.html">
+                <a class="nav-link" href="purchase_requests.php">
                     <i class="fas fa-solid fa-file"></i>
                     <span>Purchase Requests</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="purchase_orders.html">
+            <li class="nav-item">
+                <a class="nav-link" href="purchase_orders.php">
                     <i class="fas fa-solid fa-file"></i>
                     <span>Purchase Orders</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="stock_cards.html">
+            <li class="nav-item active">
+                <a class="nav-link" href="stock_cards.php">
                     <i class="fas fa-solid fa-box"></i>
                     <span>Stock Cards</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="ris.html">
+                <a class="nav-link" href="ris.php">
                     <i class="fas fa-solid fa-file"></i>
                     <span>Requisition and Issuance</span></a>
             </li>
@@ -74,22 +74,22 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="suppliers.html">
+                <a class="nav-link" href="suppliers.php">
                     <i class="fas fa-solid fa-truck"></i>
                     <span>Suppliers</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="warehouses.html">
+                <a class="nav-link" href="warehouses.php">
                     <i class="fas fa-solid fa-warehouse"></i>
                     <span>Warehouses</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="report.html">
+                <a class="nav-link" href="report.php">
                     <i class="fas fa-solid fa-chart-line"></i>
                     <span>Generate Report</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="users.html">
+                <a class="nav-link" href="users.php">
                     <i class="fas fa-solid fa-users"></i>
                     <span>Users</span></a>
             </li>
@@ -149,111 +149,118 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Purchase Orders</h1>
-                    <p class="mb-4">The PO is a form/document used by the agency/entity, addressed to a supplier, to deliver specific quantities of supplies/goods/property subject to the terms and conditions contained in the PO.</p>
-
-                    <!-- DataTales Example -->
+                    <h1 class="h3 mb-2 text-gray-800">Stock Cards</h1>
+                    <p class="mb-4">The SC is a form used in the <b>Supply and/or Property Division/Unit</b> for each type of supplies to record all receipts and issues made. It shall be maintained by fund cluster.</p>
+                    
+                    <!-- Create PO Form-->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
-                            <a href="create_po.html" class="btn btn-success" role="button">Create Purchase Order</a>
+                            <h6 class="m-0 font-weight-bold text-primary">Create Stock Card</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>PO No.</th>
-                                            <th>LGU</th>
-                                            <th>Stock No.</th>
-                                            <th>Supplier</th>
-                                            <th>PO Date</th>
-                                            <th>Mode of Procurement</th>
-                                            <th>PR No.</th>
-                                            <th>Place of Delivery</th>
-                                            <th>Date of Delivery</th>
-                                            <th>Delivery Term</th>
-                                            <th>Payment Term</th>
-                                            <th>Amount</th>
-                                            <th>Date Signed</th>
-                                            <th>Date Requested</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <!-- <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot> -->
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <form class="needs-validation">
+
+                                <legend>INFORMATION</legend>
+
+                                <div class="mb-3">
+                                    <label for="selectLGU" class="form-label">LGU</label>
+                                    <select class="form-select custom-select form-control form-control" aria-label="selectLGU" required>
+                                        <option selected>Select LGU</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="selectMOP" class="form-label">Mode of Procurement</label>
+                                    <select class="form-select custom-select form-control form-control" aria-label="selectMOP" required>
+                                        <option selected>Select Mode of Procurement</option>
+                                        <option value="1">Procurement Service</option>
+                                        <option value="3">Limited Source Bidding</option>
+                                        <option value="3">Direct Contracting</option>
+                                        <option value="3">Negotiated Procurement</option>
+                                        <option value="3">Repeat Order</option>
+                                        <option value="2">Shopping</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="selectWarehouse" class="form-label">Warehouse</label>
+                                    <select class="form-select custom-select form-control form-control" aria-label="selectWarehouse" required>
+                                        <option selected>Select Warehouse</option>
+                                        <option value="1">1</option>
+                                        <option value="3">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+
+                                <hr class="divider d-none d-sm-block"></hr>
+
+                                <legend>ITEM</legend>
+
+                                <div class="mb-3">
+                                    <label for="inputItem" class="form-label">Item</label>
+                                    <input type="text" class="form-control" id="inputItem" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="inputDescription" class="form-label">Item Description</label>
+                                    <input type="text" class="form-control" id="inputDescription" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputUnit" class="form-label">Unit of Measurement</label>
+                                    <input type="text" class="form-control" id="inputUnit" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="input" class="form-label">Re-order Point</label>
+                                    <input type="text" class="form-control" id="inputUnit" required>
+                                </div>
+
+                                <hr class="divider d-none d-sm-block"></hr>
+
+                                <legend>RECEIPT</legend>
+
+                                <div class="mb-3">
+                                    <label for="inputReceiptQty" class="form-label">Receipt Quantity</label>
+                                    <input type="text" class="form-control" id="inputReceiptQty" required>
+                                </div>
+
+                                <hr class="divider d-none d-sm-block"></hr>
+                                
+                                <legend>ISSUE</legend>
+
+                                <div class="mb-3">
+                                    <label for="inputIssueQty" class="form-label">Issue Qty</label>
+                                    <input type="text" class="form-control" id="inputIssueQty" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputIssueOffice" class="form-label">Issue Office</label>
+                                    <input type="text" class="form-control" id="inputIssueOffice" required>
+                                </div>
+
+                                <hr class="divider d-none d-sm-block"></hr>
+
+                                <legend>BALANCE</legend>
+                                
+                                <div class="mb-3">
+                                    <label for="inputBalanceQty" class="form-label">Balance Qty</label>
+                                    <input type="text" class="form-control" id="inputBalanceQty" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputDaysToConsume" class="form-label">No. of Days to Consume</label>
+                                    <input type="text" class="form-control" id="inputDaysToConsume" required>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-secondary" href="stock_cards.php">Cancel</a>
+                            <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </div>
 
@@ -298,7 +305,7 @@
                 <div class="modal-body">Click "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="login.php">Logout</a>
                 </div>
             </div>
         </div>
