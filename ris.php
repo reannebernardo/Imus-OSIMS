@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+    
 <?php require 'templates/header.php'?>
 
 <body id="page-top">
@@ -5,7 +8,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-    <?php require 'templates/sidebar.php'?>
+    <?php include 'templates/sidebar.php'?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -13,7 +16,7 @@
             <!-- Main Content -->
             <div id="content">
 
-            <?php require 'templates/topbar.php'?>
+            <?php include 'templates/topbar.php'?>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -26,7 +29,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
-                            <a href="create_ris.php" class="btn btn-success" role="button">Create RIS</a>
+                            <a href="create-ris.php" class="btn btn-success" role="button">Create RIS</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -125,15 +128,7 @@
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; City Government of Imus 2023</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <?php include 'templates/footer.php'?>
 
         </div>
         <!-- End of Content Wrapper -->
@@ -141,14 +136,9 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <?php require 'templates/logoutModal.php'?>
-
-    <?php require 'templates/footer.php'?>
+    <?php include 'templates/scroll-to-top.php'?>
+    <?php require 'templates/logout-modal.php'?>
+    <?php require 'templates/plugins.php'?>
 
 </body>
 

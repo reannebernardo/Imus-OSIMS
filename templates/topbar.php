@@ -7,7 +7,7 @@
     </button>
 
     <!-- Topbar Search -->
-    <h1 class="h2 mb-0 text-gray-800">Supply Inventory Management System</h1>
+    <h1 class="h3 mb-0 text-gray-800">Office Supplies Inventory Management System</h1>
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">

@@ -17,3 +17,4 @@
         </div>
     </div>
 </div>
+<!-- End of Logout Modal-->
