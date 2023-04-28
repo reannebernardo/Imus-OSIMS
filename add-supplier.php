@@ -5,7 +5,6 @@
 
     // POST check
     if(isset($_POST['submit'] ) ) {
-
         // Check Company Name
         if(empty($_POST['company-name']) ) {
             $errors['company-name'] = 'A company name is required. <br />';
@@ -43,15 +42,14 @@
                 $errors['products'] = 'Products must be a comma separated list.';
             }
         }
+
+        // Page Redirect
+        if(! array_filter($errors) ) {
+            header('Location: suppliers.php');
+            exit;
+        }
     }
     // End of POST check
-
-    // Page Redirect
-    if(!array_filter($errors) ) {
-        die("test");
-        header('Location: suppliers.php');
-        exit;
-    }
 
 ?>
 
