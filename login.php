@@ -1,3 +1,30 @@
+<?php
+
+    if(isset($_POST['submit'])){
+        // echo htmlspecialchars($_POST['email']);
+        // echo htmlspecialchars($_POST['password']);
+
+        // Check Email
+        if(empty($_POST['email'])){
+            echo 'A email is required <br />';
+        } else {
+            // echo htmlspecialchars($_POST['company-name']);
+            $email = $_POST['email'];
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                echo 'Email must be a valid email address';
+            }
+        }
+
+        // Check Password
+        if(empty($_POST['password'])){
+            echo 'A password is required <br />';
+        } else {
+            
+        }
+
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     
@@ -23,17 +50,14 @@
                                         <h3 class="h6 text-gray-900 mb-4">Office Supplies Inventory Management System</h3>
                                         <h5 class="h5 text-gray-900 mb-3">Welcome Back!</h5>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" action="login.php" method="POST">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="inputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address">
+                                            <input type="email" class="form-control form-control-user" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="inputPassword" placeholder="Enter Password">
+                                            <input type="password" class="form-control form-control-user" id="inputPassword" placeholder="Enter Password">
                                         </div>
-                                        <a href="index.php" class="btn btn-primary btn-user btn-block"> Login</a>
+                                        <input type="submit" name="submit" value="Login" class="btn btn-primary btn-user btn-block">
                                     </form>
                                     <hr>
                                     <div class="text-center mb-2">

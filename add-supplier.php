@@ -1,11 +1,58 @@
 <?php
 
-    if(isset($_POST['submit'])){
-        echo $_POST['company-name'];
-        echo $_POST['address'];
-        echo $_POST['tin'];
-        echo $_POST['products'];
+    $companyName = $address = $tin = $products = '';
+    $errors = array('company-name' => '', 'address' => '', 'tin' => '', 'products' => '');
+
+    // POST check
+    if(isset($_POST['submit'] ) ) {
+
+        // Check Company Name
+        if(empty($_POST['company-name']) ) {
+            $errors['company-name'] = 'A company name is required. <br />';
+        } else {
+            // echo htmlspecialchars($_POST['company-name']);
+            $companyName = $_POST['company-name'];
+        }
+
+        // Check Address
+        if(empty($_POST['address']) ) {
+            $errors['address'] = 'An address is required. <br />';
+        } else {
+            // echo htmlspecialchars($_POST['address']);
+            $address = $_POST['address'];
+        }
+
+        // Check TIN Number
+        if(empty($_POST['tin']) ) {
+            $errors['tin'] = 'A TIN number is required. <br />';
+        } else {
+            // echo htmlspecialchars($_POST['tin']);
+            $tin = $_POST['tin'];
+            if (!preg_match('^(\d{9}|\d{12})$^', $tin) ) {
+                $errors['tin'] = 'A TIN number is should be at least 9 digits and no more than 12 digits.';
+            }
+        }
+
+        // Check Products
+        if(empty($_POST['products']) ) {
+            $errors['products'] = 'At least one product is required. <br />';
+        } else {
+            // echo htmlspecialchars($_POST['product']);
+            $products = $_POST['products'];
+            if(!preg_match('/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s]*)*$/', $products) ) {
+                $errors['products'] = 'Products must be a comma separated list.';
+            }
+        }
     }
+    // End of POST check
+
+    // Page Redirect
+    if(!array_filter($errors) ) {
+        die("test");
+        header('Location: suppliers.php');
+        exit;
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -44,23 +91,27 @@
                             <form class="needs-validation" action="add-supplier.php" method="POST">
 
                                 <div class="mb-3">
-                                    <label for="inputCompanyName" class="form-label">Company Name</label>
-                                    <input type="text" class="form-control" name="company-name" id="company-name" required>
+                                    <label for="inputCompanyName" class="form-label">Company Name *</label>
+                                    <input type="text" class="form-control" name="company-name" id="company-name" value="<?php echo $companyName ?>">
+                                    <div class="mt-2 text-danger"> <?php echo $errors['company-name'] ?></div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="inputAddress" class="form-label">Address</label>
-                                    <input type="text" class="form-control" name="address" id="address" required>
+                                    <label for="inputAddress" class="form-label">Address *</label>
+                                    <input type="text" class="form-control" name="address" id="address" value="<?php echo $address ?>">
+                                    <div class="mt-2 text-danger"> <?php echo $errors['address'] ?></div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="inputTIN" class="form-label">TIN</label>
-                                    <input type="text" class="form-control" name="tin" id="tin" required>
+                                    <label for="inputTIN" class="form-label">TIN Number *</label>
+                                    <input type="text" class="form-control" name="tin" id="tin" value="<?php echo $tin ?>">
+                                    <div class="mt-2 text-danger"> <?php echo $errors['tin'] ?></div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="inputProducts" class="form-label">Products</label>
-                                    <input type="text" class="form-control" name="products" id="products" required>
+                                    <label for="inputProducts" class="form-label">Products (comma separated) *</label>
+                                    <input type="text" class="form-control" name="products" id="products" value="<?php echo $products ?>">
+                                    <div class="mt-2 text-danger"> <?php echo $errors['products'] ?></div>
                                 </div>
                                 
                                 <hr class="hr" />
@@ -73,6 +124,7 @@
                             </form>
                         </div>
                     </div>
+                    <!-- End of Add Supplier Form-->
 
                 </div>
                 <!-- /.container-fluid -->
