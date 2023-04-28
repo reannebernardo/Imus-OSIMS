@@ -1,3 +1,10 @@
+<?php
+
+    if(isset($_GET['submit'])){
+        echo $_GET[''];
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +38,7 @@
                             <h6 class="m-0 font-weight-bold text-primary">Create Purchase Request</h6>
                         </div>
                         <div class="card-body">
-                            <form class="needs-validation">
+                            <form class="needs-validation" action="create-pr.php" method="GET">
 
                                 <legend>INFORMATION</legend>
 
@@ -64,39 +71,39 @@
 
                                     <div class="mb-3">
                                         <label for="inputItemNo" class="form-label">Item No.</label>
-                                        <input type="text" class="form-control" id="inputItemNo" required>
+                                        <input type="text" class="form-control" name="inputItemNo" id="inputItemNo" required>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="inputUnit" class="form-label">Unit</label>
-                                        <input type="text" class="form-control" id="inputUnit" required>
+                                        <input type="text" class="form-control" name="inputUnit" id="inputUnit" required>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="inputDescription" class="form-label">Item Description</label>
-                                        <textarea type="text" class="form-control" id="inputDescription" required></textarea>
+                                        <label for="inputDesc" class="form-label">Item Description</label>
+                                        <textarea type="text" class="form-control" name="inputDesc" id="inputDesc" required></textarea>
                                     </div>
                                     
                                     <div class="mb-3">
                                         <label for="inputQuantity" class="form-label">Quantity</label>
-                                        <input type="text" class="form-control" id="inputQuantity" required>
+                                        <input type="text" class="form-control" name="inputQuantity" id="inputQuantity" required>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="inputUnitCost" class="form-label">Unit Cost</label>
-                                        <input type="text" class="form-control" id="inputUnitCost" required>
+                                        <input type="text" class="form-control" name="inputUnitCost" id="inputUnitCost" required>
                                     </div>
 
                                     <fieldset disabled>
                                         <div class="mb-3">
                                             <label for="inputTotalCost" class="form-label">Total Cost</label>
-                                            <input type="text" class="form-control" id="inputTotalCost" required>
+                                            <input type="text" class="form-control" name="inputTotalCost" id="inputTotalCost" required>
                                         </div>
                                     </fieldset>
 
                                     <div class="mb-3">
                                         <label for="inputPurpose" class="form-label">Purpose</label>
-                                        <textarea type="text" class="form-control" id="inputPurpose" required></textarea>
+                                        <textarea type="text" class="form-control" name="inputPurpose" id="inputPurpose" required></textarea>
                                     </div>
 
                                 </div>

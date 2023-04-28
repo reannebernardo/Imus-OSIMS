@@ -1,12 +1,11 @@
 <?php
 
-    if(isset($_GET['submit'])){
-        echo $_GET['company-name'];
-        echo $_GET['address'];
-        echo $_GET['tin'];
-        echo $_GET['products'];
+    if(isset($_POST['submit'])){
+        echo $_POST['company-name'];
+        echo $_POST['address'];
+        echo $_POST['tin'];
+        echo $_POST['products'];
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +41,7 @@
                             <h6 class="m-0 font-weight-bold text-primary">Add Supplier</h6>
                         </div>
                         <div class="card-body">
-                            <form class="needs-validation" action="add-supplier.php" method="GET">
+                            <form class="needs-validation" action="add-supplier.php" method="POST">
 
                                 <div class="mb-3">
                                     <label for="inputCompanyName" class="form-label">Company Name</label>
@@ -63,12 +62,15 @@
                                     <label for="inputProducts" class="form-label">Products</label>
                                     <input type="text" class="form-control" name="products" id="products" required>
                                 </div>
+                                
+                                <hr class="hr" />
+
+                                <div class="mb-3">
+                                    <a class="btn btn-secondary" href="suppliers.php">Cancel</a>
+                                    <input type="submit" name="submit" value="Submit" class="btn btn-success">
+                                </div>
 
                             </form>
-                        </div>
-                        <div class="card-footer">
-                            <a class="btn btn-secondary" href="suppliers.php">Cancel</a>
-                            <input type="submit" name="submit" value="Submit" class="btn btn-success">
                         </div>
                     </div>
 
