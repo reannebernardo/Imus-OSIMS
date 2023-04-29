@@ -2,17 +2,17 @@
 
     include 'config/db_connect.php';
     
-    $companyName = $address = $tin = $products = '';
-    $errors = array('company-name' => '', 'address' => '', 'tin' => '', 'products' => '');
+    $supplierName = $address = $tin = $products = '';
+    $errors = array('supplier-name' => '', 'address' => '', 'tin' => '', 'products' => '');
 
     // POST check
     if(isset($_POST['submit'] ) ) {
-        // Check Company Name
-        if(empty($_POST['company-name']) ) {
-            $errors['company-name'] = 'A company name is required. <br />';
+        // Check Supplier Name
+        if(empty($_POST['supplier-name']) ) {
+            $errors['supplier-name'] = 'A supplier name is required. <br />';
         } else {
-            // echo htmlspecialchars($_POST['company-name']);
-            $companyName = $_POST['company-name'];
+            // echo htmlspecialchars($_POST['supplier-name']);
+            $supplierName = $_POST['supplier-name'];
         }
 
         // Check Address
@@ -48,14 +48,14 @@
         // Page Redirect
         if(! array_filter($errors) ) {
 
-            // reassign variables to revent sql injection
-            $companyName = mysqli_real_escape_string($conn, $_POST['company-name']);
+            // reassign variables to prevent sql injection
+            $supplierName = mysqli_real_escape_string($conn, $_POST['supplier-name']);
             $address = mysqli_real_escape_string($conn, $_POST['address']);
             $tin = mysqli_real_escape_string($conn, $_POST['tin']);
             $products = mysqli_real_escape_string($conn, $_POST['products']);
 
             // Create SQL
-            $sql = "INSERT INTO supplier(supplier_name, supplier_address, supplier_tin, supplier_prod) VALUES('$companyName', '$address', '$tin', '$products')";
+            $sql = "INSERT INTO supplier(supplier_name, supplier_address, supplier_tin, supplier_prod) VALUES('$supplierName', '$address', '$tin', '$products')";
 
             // Save to DB and check
             if(mysqli_query($conn, $sql) ) {
@@ -64,7 +64,6 @@
             } else {
                 echo 'query error: ' . mysqli_error($conn);
             }
-            
         }
     }
     // End of POST check
@@ -107,9 +106,9 @@
                             <form class="needs-validation" action="add-supplier.php" method="POST">
 
                                 <div class="mb-3">
-                                    <label for="inputCompanyName" class="form-label">Company Name *</label>
-                                    <input type="text" class="form-control" name="company-name" id="company-name" value="<?php echo $companyName ?>">
-                                    <div class="mt-2 text-danger"> <?php echo $errors['company-name'] ?></div>
+                                    <label for="inputsupplierName" class="form-label">Supplier Name *</label>
+                                    <input type="text" class="form-control" name="supplier-name" id="supplier-name" value="<?php echo $supplierName ?>">
+                                    <div class="mt-2 text-danger"> <?php echo $errors['supplier-name'] ?></div>
                                 </div>
 
                                 <div class="mb-3">

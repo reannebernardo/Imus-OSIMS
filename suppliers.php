@@ -2,6 +2,35 @@
 
     include 'config/db_connect.php';
 
+    if(isset($_POST['delete']) ) {
+        
+        $id_to_delete = mysqli_real_escape_string($conn, $_POST['id_to_delete']);
+
+        $sql = "DELETE FROM supplier WHERE supplier_id = $id_to_delete";
+
+        if(mysqli_query($conn, $sql)) {
+            header('Location: suppliers.php');
+            exit;
+        } else {
+            echo 'Query error: ' . mysqli_error($conn);
+        }
+    }
+
+    if(isset($_GET['supplier_id'])){
+        
+        // Escape SQL characters
+        $supplier_id = mysqli_real_escape_string($conn, $_GET['supplier_id']);
+        // Make SQL
+        $sql = "SELECT * FROM supplier WHERE supplier_id = $supplier_id";
+        // Get the query result
+        $result = mysqli_query($conn, $sql);
+        // Fetch result in array format
+        $supplier = mysqli_fetch_assoc($result);
+
+        mysqli_free_result($result);
+        mysqli_close($conn);
+    }
+
     // Write query for all suppliers
     $sql = 'SELECT * FROM supplier ORDER BY supplier_id';
 
@@ -82,7 +111,6 @@
                                                     <?php echo htmlspecialchars($supplier['supplier_tin']) ?>
                                                 </td>
                                                 <td>
-                                                    
                                                     <ul class="list-unstyled">
                                                         <?php foreach(explode(',', $supplier['supplier_prod']) as $product ) : ?>
                                                             <li> <?php echo htmlspecialchars($product) ?> </li>
@@ -90,10 +118,14 @@
                                                         <?php endforeach; ?>
                                                     </ul>
                                                 </td>
-                                            
                                                 <td>
-                                                    <button type="button" class="btn btn-warning">Edit</button>
-                                                    <button type="button" class="btn btn-danger">Delete</button>
+                                                    <div class="d-flex w-100">
+                                                        <a href="edit-supplier.php?supplier_id=<?php echo $supplier['supplier_id'] ?>" class="btn btn-warning">Edit</a>
+                                                        <form action="suppliers.php" method="POST" class="ml-1">
+                                                            <input type="hidden" name="id_to_delete" value="<?php echo $supplier['supplier_id'] ?>">
+                                                            <input type="submit" name="delete" value="Delete" class="btn btn-danger">
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
