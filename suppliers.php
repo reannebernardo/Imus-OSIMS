@@ -26,8 +26,9 @@
         $result = mysqli_query($conn, $sql);
         // Fetch result in array format
         $supplier = mysqli_fetch_assoc($result);
-
+        // Free result from memory
         mysqli_free_result($result);
+        // Close DB connection
         mysqli_close($conn);
     }
 
@@ -91,6 +92,8 @@
                                             <th>Address</th>
                                             <th>TIN</th>
                                             <th>Products</th>
+                                            <th>Industry</th>
+                                            <th>Appointed Date</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -112,11 +115,17 @@
                                                 </td>
                                                 <td>
                                                     <ul class="list-unstyled">
-                                                        <?php foreach(explode(',', $supplier['supplier_prod']) as $product ) : ?>
+                                                        <?php foreach(explode(',', $supplier['supplier_products']) as $product ) : ?>
                                                             <li> <?php echo htmlspecialchars($product) ?> </li>
 
                                                         <?php endforeach; ?>
                                                     </ul>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($supplier['supplier_industry']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($supplier['appointed_date']) ?>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex w-100">
@@ -129,7 +138,6 @@
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
-                                        
                                     </tbody>
                                 </table>
                             </div>

@@ -2,8 +2,8 @@
 
     include 'config/db_connect.php';
     
-    $supplierName = $address = $tin = $products = '';
-    $errors = array('supplier-name' => '', 'address' => '', 'tin' => '', 'products' => '');
+    $supplierName = $address = $tin = $products = $industry = $appointed_date = '';
+    $errors = array('supplier-name' => '', 'address' => '', 'tin' => '', 'products' => '', 'industry' => '', 'appointed-date' => '');
 
     // POST check
     if(isset($_POST['submit'] ) ) {
@@ -29,9 +29,9 @@
         } else {
             // echo htmlspecialchars($_POST['tin']);
             $tin = $_POST['tin'];
-            if (!preg_match('^(\d{9}|\d{12})$^', $tin) ) {
-                $errors['tin'] = 'A TIN number is should be at least 9 digits and no more than 12 digits.';
-            }
+            // if (!preg_match('^(\d{9}|\d{12})$^', $tin) ) {
+            //     $errors['tin'] = 'A TIN number is should be at least 9 digits and no more than 12 digits.';
+            // }
         }
 
         // Check Products
@@ -40,9 +40,30 @@
         } else {
             // echo htmlspecialchars($_POST['product']);
             $products = $_POST['products'];
-            if(!preg_match('/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s]*)*$/', $products) ) {
-                $errors['products'] = 'Products must be a comma separated list.';
-            }
+            // if(!preg_match('/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s]*)*$/', $products) ) {
+            //     $errors['products'] = 'Products must be a comma separated list.';
+            // }
+        }
+
+        // Check Industry
+        if(empty($_POST['industry']) ) {
+            $errors['industry'] = 'An industry is required. <br />';
+        } else {
+            // echo htmlspecialchars($_POST['industry']);
+            $industry = $_POST['industry'];
+        }
+
+        // Check Appointed Date
+        if(empty($_POST['appointed-date']) ) {
+            $errors['appointed-date'] = 'A date is required. <br />';
+        } else {
+            // echo htmlspecialchars($_POST['product']);
+            $products = $_POST['appointed-date'];
+            // if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$date)) {
+            //     $errors['appointed-date'] = 'Date format is invalid. <br />';
+            // } else {
+            //     $appointed_date = $_POST['appointed-date'];
+            // }
         }
 
         // Page Redirect
@@ -53,9 +74,12 @@
             $address = mysqli_real_escape_string($conn, $_POST['address']);
             $tin = mysqli_real_escape_string($conn, $_POST['tin']);
             $products = mysqli_real_escape_string($conn, $_POST['products']);
+            $industry = mysqli_real_escape_string($conn, $_POST['industry']);
+            $appointed_date = mysqli_real_escape_string($conn, $_POST['appointed-date']);
 
             // Create SQL
-            $sql = "INSERT INTO supplier(supplier_name, supplier_address, supplier_tin, supplier_prod) VALUES('$supplierName', '$address', '$tin', '$products')";
+            $sql = "INSERT INTO supplier(supplier_name, supplier_address, supplier_tin, supplier_products, supplier_industry, appointed_date) 
+                    VALUES('$supplierName', '$address', '$tin', '$products', '$industry', '$appointed_date')";
 
             // Save to DB and check
             if(mysqli_query($conn, $sql) ) {
@@ -124,9 +148,21 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="inputProducts" class="form-label">Products (comma separated) *</label>
+                                    <label for="inputProducts" class="form-label">Products <i> (comma separated) </i>*</label>
                                     <input type="text" class="form-control" name="products" id="products" value="<?php echo $products ?>">
                                     <div class="mt-2 text-danger"> <?php echo $errors['products'] ?></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputIndustry" class="form-label">Industry *</label>
+                                    <input type="text" class="form-control" name="industry" id="industry" value="<?php echo $industry ?>">
+                                    <div class="mt-2 text-danger"> <?php echo $errors['industry'] ?></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputAppointedDate" class="form-label">Appointed Date <i> (Format: YYYY-MM-DD) </i>*</label>
+                                    <input type="text" class="form-control" name="appointed-date" id="appointed-date" value="<?php echo $products ?>">
+                                    <div class="mt-2 text-danger"> <?php echo $errors['appointed-date'] ?></div>
                                 </div>
                                 
                                 <hr class="hr" />

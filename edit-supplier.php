@@ -19,7 +19,7 @@
         
     }
 
-    $errors = array('supplier-name' => '', 'address' => '', 'tin' => '', 'products' => '');
+    $errors = array('supplier-name' => '', 'address' => '', 'tin' => '', 'products' => '', 'industry' => '', 'appointed-date' => '');
 
     // POST check
     if(isset($_POST['update'] ) ) {
@@ -62,6 +62,27 @@
             }
         }
 
+        // Check Industry
+        if(empty($_POST['industry']) ) {
+            $errors['industry'] = 'An industry is required. <br />';
+        } else {
+            // echo htmlspecialchars($_POST['industry']);
+            $industry = $_POST['industry'];
+        }
+
+        // Check Appointed Date
+        if(empty($_POST['appointed-date']) ) {
+            $errors['appointed-date'] = 'A date is required. <br />';
+        } else {
+            // echo htmlspecialchars($_POST['product']);
+            $products = $_POST['appointed-date'];
+            // if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$date)) {
+            //     $errors['appointed-date'] = 'Date format is invalid. <br />';
+            // } else {
+            //     $appointed_date = $_POST['appointed-date'];
+            // }
+        }
+
         // Page Redirect
         if(! array_filter($errors) ) {
 
@@ -70,11 +91,13 @@
             $address = mysqli_real_escape_string($conn, $_POST['address']);
             $tin = mysqli_real_escape_string($conn, $_POST['tin']);
             $products = mysqli_real_escape_string($conn, $_POST['products']);
+            $industry = mysqli_real_escape_string($conn, $_POST['industry']);
+            $appointed_date = mysqli_real_escape_string($conn, $_POST['appointed-date']);
 
             $id_to_update = mysqli_real_escape_string($conn, $_POST['id_to_update']);
 
             $sql = "UPDATE supplier
-                    SET supplier_name = '$supplierName', supplier_address = '$address', supplier_tin = '$tin', supplier_prod = '$products'
+                    SET supplier_name = '$supplierName', supplier_address = '$address', supplier_tin = '$tin', supplier_products = '$products', supplier_industry = '$industry', appointed_date = '$appointed_date'
                     WHERE supplier_id = $id_to_update";
 
             // Save to DB and check
@@ -145,8 +168,20 @@
 
                                     <div class="mb-3">
                                         <label for="inputProducts" class="form-label">Products (comma separated) *</label>
-                                        <input type="text" class="form-control" name="products" id="products" value="<?php echo htmlspecialchars($supplier['supplier_prod']) ?>">
+                                        <input type="text" class="form-control" name="products" id="products" value="<?php echo htmlspecialchars($supplier['supplier_products']) ?>">
                                         <div class="mt-2 text-danger"> <?php echo $errors['products'] ?></div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="inputIndustry" class="form-label">Industry *</label>
+                                        <input type="text" class="form-control" name="industry" id="industry" value="<?php echo htmlspecialchars($supplier['supplier_industry']) ?>">
+                                        <div class="mt-2 text-danger"> <?php echo $errors['industry'] ?></div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="inputAppointedDate" class="form-label">Appointed Date <i> (Format: YYYY-MM-DD) </i>*</label>
+                                        <input type="text" class="form-control" name="appointed-date" id="appointed-date" value="<?php echo htmlspecialchars($supplier['appointed_date']) ?>">
+                                        <div class="mt-2 text-danger"> <?php echo $errors['appointed-date'] ?></div>
                                     </div>
                                     
                                     <hr class="hr" />
