@@ -11,7 +11,6 @@
         if(empty($_POST['supplier-name']) ) {
             $errors['supplier-name'] = 'A supplier name is required. <br />';
         } else {
-            // echo htmlspecialchars($_POST['supplier-name']);
             $supplierName = $_POST['supplier-name'];
         }
 
@@ -19,7 +18,6 @@
         if(empty($_POST['address']) ) {
             $errors['address'] = 'An address is required. <br />';
         } else {
-            // echo htmlspecialchars($_POST['address']);
             $address = $_POST['address'];
         }
 
@@ -27,7 +25,6 @@
         if(empty($_POST['tin']) ) {
             $errors['tin'] = 'A TIN number is required. <br />';
         } else {
-            // echo htmlspecialchars($_POST['tin']);
             $tin = $_POST['tin'];
             // if (!preg_match('^(\d{9}|\d{12})$^', $tin) ) {
             //     $errors['tin'] = 'A TIN number is should be at least 9 digits and no more than 12 digits.';
@@ -38,7 +35,6 @@
         if(empty($_POST['products']) ) {
             $errors['products'] = 'At least one product is required. <br />';
         } else {
-            // echo htmlspecialchars($_POST['product']);
             $products = $_POST['products'];
             // if(!preg_match('/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s]*)*$/', $products) ) {
             //     $errors['products'] = 'Products must be a comma separated list.';
@@ -49,7 +45,6 @@
         if(empty($_POST['industry']) ) {
             $errors['industry'] = 'An industry is required. <br />';
         } else {
-            // echo htmlspecialchars($_POST['industry']);
             $industry = $_POST['industry'];
         }
 
@@ -57,7 +52,6 @@
         if(empty($_POST['appointed-date']) ) {
             $errors['appointed-date'] = 'A date is required. <br />';
         } else {
-            // echo htmlspecialchars($_POST['product']);
             $products = $_POST['appointed-date'];
             // if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$date)) {
             //     $errors['appointed-date'] = 'Date format is invalid. <br />';

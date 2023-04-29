@@ -1,3 +1,53 @@
+<?php
+
+    include 'config/db_connect.php';
+
+    if(isset($_POST['delete']) ) {
+        
+        $id_to_delete = mysqli_real_escape_string($conn, $_POST['id_to_delete']);
+
+        $sql = "DELETE FROM warehouse WHERE wr_code = $id_to_delete";
+
+        if(mysqli_query($conn, $sql)) {
+            header('Location: warehouses.php');
+            exit;
+        } else {
+            echo 'Query error: ' . mysqli_error($conn);
+        }
+    }
+
+    if(isset($_GET['wr_code'])){
+        
+        // Escape SQL characters
+        $wr_code = mysqli_real_escape_string($conn, $_GET['wr_code']);
+        // Make SQL
+        $sql = "SELECT * FROM warehouse WHERE wr_code = $wr_code";
+        // Get the query result
+        $result = mysqli_query($conn, $sql);
+        // Fetch result in array format
+        $warehouse = mysqli_fetch_assoc($result);
+        // Free result from memory
+        mysqli_free_result($result);
+        // Close DB connection
+        mysqli_close($conn);
+    }
+
+    // Write query for all suppliers
+    $sql = 'SELECT * FROM warehouse ORDER BY wr_code';
+
+    // Make the query and get results
+    $result = mysqli_query($conn, $sql);
+
+    // Fetch the resulting rows as an array
+    $warehouses = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    // Free result from memory
+    mysqli_free_result($result);
+
+    // Close DB connection
+    mysqli_close($conn);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     
@@ -37,65 +87,52 @@
                                     <thead>
                                         <tr>
                                             <th>Code</th>
-                                            <th>Name</th>
+                                            <th>Warehouse Name</th>
                                             <th>Address</th>
-                                            <th>Manager</th>
+                                            <th>Remaining Capacity</th>
+                                            <th>Manager Name</th>
                                             <th>Phone</th>
                                             <th>Email</th>
-                                            <th>Remaining Capacity</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <!-- <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot> -->
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>2011/04/25</td>
-                                            <td>2011/04/25</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>2011/07/25</td>
-                                            <td>2011/07/25</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>2012/03/29</td>
-                                            <td>2012/03/29</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
+
+                                        <?php foreach($warehouses as $warehouse) : ?>
+                                            <tr>
+                                                <td>
+                                                    <?php echo htmlspecialchars($warehouse['wr_code']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($warehouse['wr_name']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($warehouse['wr_address']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($warehouse['wr_remaining_capacity']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($warehouse['wr_manager']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($warehouse['wr_phone']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($warehouse['wr_email']) ?>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex w-100">
+                                                        <a href="edit-warehouse.php?wr_code=<?php echo $warehouse['wr_code'] ?>" class="btn btn-warning">Edit</a>
+                                                        <form action="warehouses.php" method="POST" class="ml-1">
+                                                            <input type="hidden" name="id_to_delete" value="<?php echo $warehouse['wr_code'] ?>">
+                                                            <input type="submit" name="delete" value="Delete" class="btn btn-danger">
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+
                                     </tbody>
                                 </table>
                             </div>
