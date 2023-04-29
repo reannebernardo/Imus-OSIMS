@@ -1,5 +1,30 @@
 <?php
 
+    // Connect to DB
+    $conn = mysqli_connect('localhost', 'test', 'test1234', 'test-osims');
+
+    // Check connection to DB
+    if(!$conn) {
+        echo 'Connection error: ' . mysqli_connect_error();
+    }
+
+    // Write query for all suppliers
+    $sql = 'SELECT * FROM supplier ORDER BY supplier_id';
+
+    // Make the query and get results
+    $result = mysqli_query($conn, $sql);
+
+    // Fetch the resulting rows as an array
+    $suppliers = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    // Free result from memory
+    mysqli_free_result($result);
+
+    // Close DB connection
+    mysqli_close($conn);
+
+    // print_r($suppliers);
+
 ?>
 
 <!DOCTYPE html>
@@ -49,39 +74,32 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
+                                        
+                                        <?php foreach($suppliers as $supplier) { ?>
+                                            <tr>
+                                                <td>
+                                                    <?php echo htmlspecialchars($supplier['supplier_id']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($supplier['supplier_name']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($supplier['supplier_address']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($supplier['supplier_tin']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($supplier['supplier_prod']) ?>
+                                                </td>
+                                            
+                                                <td>
+                                                    <button type="button" class="btn btn-warning">Edit</button>
+                                                    <button type="button" class="btn btn-danger">Delete</button>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                        
                                     </tbody>
                                 </table>
                             </div>
