@@ -61,7 +61,7 @@
             <span>Generate Report</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="lgu.php">
+        <a class="nav-link" href="lgus.php">
             <i class="fas fa-solid fa-landmark"></i>
             <span>LGUs</span></a>
     </li>
