@@ -81,7 +81,7 @@
                                 <hr class="hr" />
 
                                 <div class="mb-3">
-                                    <a class="btn btn-secondary" href="lgu.php">Cancel</a>
+                                    <a class="btn btn-secondary" href="lgus.php">Cancel</a>
                                     <input type="submit" name="submit" value="Submit" class="btn btn-success">
                                 </div>
 
