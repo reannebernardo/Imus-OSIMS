@@ -25,6 +25,8 @@
 
     // print_r($suppliers);
 
+    // explode(',', $suppliers[0]['supplier_prod']);
+
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +77,7 @@
                                     </thead>
                                     <tbody>
                                         
-                                        <?php foreach($suppliers as $supplier) { ?>
+                                        <?php foreach($suppliers as $supplier) : ?>
                                             <tr>
                                                 <td>
                                                     <?php echo htmlspecialchars($supplier['supplier_id']) ?>
@@ -90,7 +92,13 @@
                                                     <?php echo htmlspecialchars($supplier['supplier_tin']) ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo htmlspecialchars($supplier['supplier_prod']) ?>
+                                                    
+                                                    <ul class="list-unstyled">
+                                                        <?php foreach(explode(',', $supplier['supplier_prod']) as $product ) : ?>
+                                                            <li> <?php echo htmlspecialchars($product) ?> </li>
+
+                                                        <?php endforeach; ?>
+                                                    </ul>
                                                 </td>
                                             
                                                 <td>
@@ -98,7 +106,7 @@
                                                     <button type="button" class="btn btn-danger">Delete</button>
                                                 </td>
                                             </tr>
-                                        <?php } ?>
+                                        <?php endforeach; ?>
                                         
                                     </tbody>
                                 </table>
