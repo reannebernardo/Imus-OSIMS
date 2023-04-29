@@ -54,7 +54,27 @@
     <div class="sidebar-heading">
         Administration
     </div>
-
+    
+    <li class="nav-item">
+        <a class="nav-link" href="report.php">
+            <i class="fas fa-solid fa-chart-line"></i>
+            <span>Generate Report</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="lgu.php">
+            <i class="fas fa-solid fa-landmark"></i>
+            <span>LGUs</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="offices.php">
+            <i class="fas fa-solid fa-building"></i>
+            <span>Offices</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="stock_items.php">
+            <i class="fas fa-solid fa-truck"></i>
+            <span>Stock Items</span></a>
+        </li>
     <li class="nav-item">
         <a class="nav-link" href="suppliers.php">
             <i class="fas fa-solid fa-truck"></i>
@@ -66,19 +86,14 @@
             <span>Warehouses</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="report.php">
-            <i class="fas fa-solid fa-chart-line"></i>
-            <span>Generate Report</span></a>
+        <a class="nav-link" href="supply_custodians.php">
+            <i class="fas fa-solid fa-users"></i>
+            <span>Supply Custodians</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="users.php">
             <i class="fas fa-solid fa-users"></i>
             <span>Users</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="utilities.php">
-            <i class="fas fa-solid fa-wrench"></i>
-            <span>Utilities</span></a>
     </li>
 
     <!-- Sidebar Toggler (Sidebar) -->
