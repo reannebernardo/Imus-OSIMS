@@ -1,12 +1,6 @@
 <?php
 
-    // Connect to DB
-    $conn = mysqli_connect('localhost', 'test', 'test1234', 'test-osims');
-
-    // Check connection to DB
-    if(!$conn) {
-        echo 'Connection error: ' . mysqli_connect_error();
-    }
+    include 'config/db_connect.php';
 
     // Write query for all suppliers
     $sql = 'SELECT * FROM supplier ORDER BY supplier_id';
@@ -22,10 +16,6 @@
 
     // Close DB connection
     mysqli_close($conn);
-
-    // print_r($suppliers);
-
-    // explode(',', $suppliers[0]['supplier_prod']);
 
 ?>
 

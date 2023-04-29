@@ -1,5 +1,7 @@
 <?php
 
+    include 'config/db_connect.php';
+    
     $companyName = $address = $tin = $products = '';
     $errors = array('company-name' => '', 'address' => '', 'tin' => '', 'products' => '');
 
@@ -45,8 +47,24 @@
 
         // Page Redirect
         if(! array_filter($errors) ) {
-            header('Location: suppliers.php');
-            exit;
+
+            // reassign variables to revent sql injection
+            $companyName = mysqli_real_escape_string($conn, $_POST['company-name']);
+            $address = mysqli_real_escape_string($conn, $_POST['address']);
+            $tin = mysqli_real_escape_string($conn, $_POST['tin']);
+            $products = mysqli_real_escape_string($conn, $_POST['products']);
+
+            // Create SQL
+            $sql = "INSERT INTO supplier(supplier_name, supplier_address, supplier_tin, supplier_prod) VALUES('$companyName', '$address', '$tin', '$products')";
+
+            // Save to DB and check
+            if(mysqli_query($conn, $sql) ) {
+                header('Location: suppliers.php');
+                exit;
+            } else {
+                echo 'query error: ' . mysqli_error($conn);
+            }
+            
         }
     }
     // End of POST check
