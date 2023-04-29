@@ -80,7 +80,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
-                            <a href="add-office.php" class="btn btn-success" role="button">Add LGU</a>
+                            <a href="add-office.php" class="btn btn-success" role="button">Add Office</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
