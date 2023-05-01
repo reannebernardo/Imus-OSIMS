@@ -42,13 +42,6 @@
             }
         }
 
-        // Check User Role
-        if($_POST['user-role'] == "Select Role" ) {
-            $errors['user-role'] = 'A role is required. <br />';
-        } else {
-            $user_role = $_POST['user-role'];
-        }
-
         // Page Redirect
         if(! array_filter($errors) ) {
 
