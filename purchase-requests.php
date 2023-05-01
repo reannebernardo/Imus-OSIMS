@@ -32,7 +32,7 @@
         mysqli_close($conn);
     }
 
-    // Write query for all suppliers
+    // Write query for all purchase requests
     $sql = 'SELECT * FROM purchase_request ORDER BY pr_no';
 
     // Make the query and get results
@@ -121,21 +121,21 @@
                                                     <?php echo htmlspecialchars($purchase_request['pr_purpose']) ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo htmlspecialchars($purchase_request['requested_by']) ?>
+                                                    <?php echo 'requested by' ?>
                                                 </td>
                                                 <td>
                                                     <?php echo htmlspecialchars($purchase_request['approved_by']) ?>
                                                 </td>
                                                 <td>
-                                                    <span class="badge badge-pill badge-success">Approved</span>
-                                                    <span class="badge badge-pill badge-danger">Rejected</span>
-                                                    <span class="badge badge-pill badge-warning">Pending Approval</span>
+                                                    <!-- <span class="badge badge-pill badge-success">Approved</span>
+                                                    <span class="badge badge-pill badge-danger">Rejected</span> -->
+                                                    <span class="badge badge-pill-md badge-warning">Pending Approval</span>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex w-100">
-                                                        <a href="edit-supplier.php?supplier_id=<?php echo $supplier['supplier_id'] ?>" class="btn btn-warning">Edit</a>
-                                                        <form action="suppliers.php" method="POST" class="ml-1">
-                                                            <input type="hidden" name="id_to_delete" value="<?php echo $supplier['supplier_id'] ?>">
+                                                        <a href="edit-pr.php?supplier_id=<?php echo $purchase_request['pr_no'] ?>" class="btn btn-warning">Edit</a>
+                                                        <form action="purchase-requests.php" method="POST" class="ml-1">
+                                                            <input type="hidden" name="id_to_delete" value="<?php echo $purchase_request['pr_no'] ?>">
                                                             <input type="submit" name="delete" value="Delete" class="btn btn-danger">
                                                         </form>
                                                     </div>

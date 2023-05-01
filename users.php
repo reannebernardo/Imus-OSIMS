@@ -106,7 +106,7 @@
                                                     <?php echo htmlspecialchars($user['user_email']) ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo htmlspecialchars($user['role_id']) ?>
+                                                    <?php echo ($user['role_id']) ?>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex w-100">

@@ -36,9 +36,9 @@
             $errors['products'] = 'At least one product is required. <br />';
         } else {
             $products = $_POST['products'];
-            // if(!preg_match('/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s]*)*$/', $products) ) {
-            //     $errors['products'] = 'Products must be a comma separated list.';
-            // }
+            if(!preg_match('/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s]*)*$/', $products) ) {
+                $errors['products'] = 'Products must be a comma separated list.';
+            }
         }
 
         // Check Industry
