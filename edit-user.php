@@ -2,6 +2,12 @@
 
     include 'config/db_connect.php';
 
+    $sql ="SELECT role_id, role_name FROM user_role";
+    $result = mysqli_query($conn, $sql);
+    if($result->num_rows> 0){
+        $roles= mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+
     // Check GET request ID parameter
     if(isset($_GET['user_id']) ) {
         
@@ -13,14 +19,13 @@
         $result = mysqli_query($conn, $sql);
         // Fetch result in array format
         $user = mysqli_fetch_assoc($result);
-        print_r($user);
 
         mysqli_free_result($result);
         mysqli_close($conn);
         
     }
 
-    $errors = array('user-name' => '', 'user-email' => '', 'user-role' => '');
+    $errors = array('user-name' => '', 'user-email' => '', 'role-id' => '');
 
     // POST check
     if(isset($_POST['update'] ) ) {
@@ -48,12 +53,12 @@
             // reassign variables to prevent sql injection
             $user_name = mysqli_real_escape_string($conn, $_POST['user-name']);
             $user_email = mysqli_real_escape_string($conn, $_POST['user-email']);
-            $user_role = mysqli_real_escape_string($conn, $_POST['user-role']);
+            $role_id = mysqli_real_escape_string($conn, $_POST['selectRole']);
 
             $id_to_update = mysqli_real_escape_string($conn, $_POST['id_to_update']);
 
             $sql = "UPDATE user
-                    SET user_name = '$user_name', user_email = '$user_email', user_role = '$user_role'
+                    SET user_name = '$user_name', user_email = '$user_email', role_id = '$role_id'
                     WHERE user_id = $id_to_update";
 
             // Save to DB and check
@@ -118,16 +123,16 @@
 
                                     <div class="mb-3">
                                         <label for="selectRole" class="form-label">Role *</label>
-                                        <select class="form-select custom-select form-control form-control" aria-label="selectRole" id="user-role" name="user-role">
-                                            <option value="Select Role">Select Role</option>
-                                            <option value="Supply Custodian">Supply Custodian</option>
-                                            <option value="Supply Division Approver">Supply Division Approver</option>
-                                            <option value="Supplier">Supplier</option>
-                                            <option value="Supply Division Staff">Supply Division Staff</option>
-                                            <option value="Admin">Admin</option>
+
+                                        <select class="form-select custom-select form-control form-control" aria-label="selectLGU" name="selectRole">
+                                            <?php 
+                                            foreach ($roles as $role) {
+                                            ?>
+                                                <option value="<?php echo $role['role_id']?>" name="role-id"> <?php echo $role['role_name']; ?> </option>
+                                            <?php } ?>
                                         </select>
 
-                                        <div class="mt-2 text-danger"> <?php echo $errors['user-role'] ?></div>
+                                        <div class="mt-2 text-danger"> <?php echo $errors['role-id'] ?></div>
                                     </div>
                                     
                                     <hr class="hr" />
