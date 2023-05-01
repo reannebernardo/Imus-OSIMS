@@ -71,7 +71,7 @@
             <span>Offices</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="stock_items.php">
+        <a class="nav-link" href="stock-items.php">
             <i class="fas fa-solid fa-truck"></i>
             <span>Stock Items</span></a>
         </li>
