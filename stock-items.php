@@ -6,40 +6,40 @@
         
         $id_to_delete = mysqli_real_escape_string($conn, $_POST['id_to_delete']);
 
-        $sql = "DELETE FROM supplier WHERE supplier_id = $id_to_delete";
+        $sql = "DELETE FROM stock_item WHERE stock_id = $id_to_delete";
 
         if(mysqli_query($conn, $sql)) {
-            header('Location: suppliers.php');
+            header('Location: stock-items.php');
             exit;
         } else {
             echo 'Query error: ' . mysqli_error($conn);
         }
     }
 
-    if(isset($_GET['supplier_id'])){
+    if(isset($_GET['stock_id'])){
         
         // Escape SQL characters
-        $supplier_id = mysqli_real_escape_string($conn, $_GET['supplier_id']);
+        $stock_id = mysqli_real_escape_string($conn, $_GET['stock_id']);
         // Make SQL
-        $sql = "SELECT * FROM supplier WHERE supplier_id = $supplier_id";
+        $sql = "SELECT * FROM stock_item WHERE stock_id = $stock_id";
         // Get the query result
         $result = mysqli_query($conn, $sql);
         // Fetch result in array format
-        $supplier = mysqli_fetch_assoc($result);
+        $stock_item = mysqli_fetch_assoc($result);
         // Free result from memory
         mysqli_free_result($result);
         // Close DB connection
         mysqli_close($conn);
     }
 
-    // Write query for all suppliers
-    $sql = 'SELECT * FROM supplier ORDER BY supplier_id';
+    // Write query for all stock_items
+    $sql = 'SELECT * FROM stock_item ORDER BY stock_id';
 
     // Make the query and get results
     $result = mysqli_query($conn, $sql);
 
     // Fetch the resulting rows as an array
-    $suppliers = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $stock_items = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     // Free result from memory
     mysqli_free_result($result);
@@ -73,14 +73,14 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Suppliers</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Stock Items</h1>
                     <p class="mb-4"></p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
-                            <a href="add-supplier.php" class="btn btn-success">Add Supplier</a>
+                            <a href="add-stock-item.php" class="btn btn-success">Add Stock Item</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -88,50 +88,53 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Address</th>
-                                            <th>TIN</th>
-                                            <th>Products</th>
-                                            <th>Industry</th>
-                                            <th>Appointed Date</th>
+                                            <th>SKU</th>
+                                            <th>Stock Name</th>
+                                            <th>Unit</th>
+                                            <th>Description</th>
+                                            <th>Stock Quantity</th>
+                                            <th>Unit Cost</th>
+                                            <th>Total Cost</th>
+                                            <th>Date Encoded</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         
-                                        <?php foreach($suppliers as $supplier) : ?>
+                                        <?php foreach($stock_items as $stock_item) : ?>
                                             <tr>
                                                 <td>
-                                                    <?php echo htmlspecialchars($supplier['supplier_id']) ?>
+                                                    <?php echo htmlspecialchars($stock_item['stock_id']) ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo htmlspecialchars($supplier['supplier_name']) ?>
+                                                    <?php echo htmlspecialchars($stock_item['stock_sku']) ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo htmlspecialchars($supplier['supplier_address']) ?>
+                                                    <?php echo htmlspecialchars($stock_item['stock_name']) ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo htmlspecialchars($supplier['supplier_tin']) ?>
+                                                    <?php echo htmlspecialchars($stock_item['stock_unit']) ?>
                                                 </td>
                                                 <td>
-                                                    <ul class="list-unstyled">
-                                                        <?php foreach(explode(',', $supplier['supplier_products']) as $product ) : ?>
-                                                            <li> <?php echo htmlspecialchars($product) ?> </li>
-
-                                                        <?php endforeach; ?>
-                                                    </ul>
+                                                    <?php echo htmlspecialchars($stock_item['stock_desc']) ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo htmlspecialchars($supplier['supplier_industry']) ?>
+                                                    <?php echo htmlspecialchars($stock_item['stock_qty']) ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo htmlspecialchars($supplier['appointed_date']) ?>
+                                                    <?php echo htmlspecialchars($stock_item['unit_cost']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($stock_item['total_cost']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($stock_item['date_encoded']) ?>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex w-100">
-                                                        <a href="edit-supplier.php?supplier_id=<?php echo $supplier['supplier_id'] ?>" class="btn btn-warning">Edit</a>
-                                                        <form action="suppliers.php" method="POST" class="ml-1">
-                                                            <input type="hidden" name="id_to_delete" value="<?php echo $supplier['supplier_id'] ?>">
+                                                        <a href="edit-stock-item.php?stock_id=<?php echo $stock_item['stock_id'] ?>" class="btn btn-warning">Edit</a>
+                                                        <form action="stock-items.php" method="POST" class="ml-1">
+                                                            <input type="hidden" name="id_to_delete" value="<?php echo $stock_item['stock_id'] ?>">
                                                             <input type="submit" name="delete" value="Delete" class="btn btn-danger">
                                                         </form>
                                                     </div>
