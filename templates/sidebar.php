@@ -17,7 +17,7 @@
     </div>
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item">
         <a class="nav-link" href="index.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
@@ -94,6 +94,11 @@
         <a class="nav-link" href="users.php">
             <i class="fas fa-solid fa-users"></i>
             <span>Users</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="user-roles.php">
+            <i class="fas fa-solid fa-users"></i>
+            <span>User Roles</span></a>
     </li>
 
     <!-- Sidebar Toggler (Sidebar) -->

@@ -1,5 +1,52 @@
 <?php
 
+    include 'config/db_connect.php';
+
+    if(isset($_POST['delete']) ) {
+        
+        $id_to_delete = mysqli_real_escape_string($conn, $_POST['id_to_delete']);
+
+        $sql = "DELETE FROM purchase_request WHERE pr_no = $id_to_delete";
+
+        if(mysqli_query($conn, $sql)) {
+            header('Location: purchase-requests.php');
+            exit;
+        } else {
+            echo 'Query error: ' . mysqli_error($conn);
+        }
+    }
+
+    if(isset($_GET['pr_no'])){
+        
+        // Escape SQL characters
+        $pr_no = mysqli_real_escape_string($conn, $_GET['pr_no']);
+        // Make SQL
+        $sql = "SELECT * FROM purchase_request WHERE pr_no = $pr_no";
+        // Get the query result
+        $result = mysqli_query($conn, $sql);
+        // Fetch result in array format
+        $purchase_request = mysqli_fetch_assoc($result);
+        // Free result from memory
+        mysqli_free_result($result);
+        // Close DB connection
+        mysqli_close($conn);
+    }
+
+    // Write query for all suppliers
+    $sql = 'SELECT * FROM purchase_request ORDER BY pr_no';
+
+    // Make the query and get results
+    $result = mysqli_query($conn, $sql);
+
+    // Fetch the resulting rows as an array
+    $purchase_requests = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    // Free result from memory
+    mysqli_free_result($result);
+
+    // Close DB connection
+    mysqli_close($conn);
+
 ?>
 
 <!DOCTYPE html>
@@ -41,69 +88,60 @@
                                     <thead>
                                         <tr>
                                             <th>PR No.</th>
+                                            <th>PR Date</th>
                                             <th>LGU</th>
                                             <th>Office</th>
-                                            <th>PR Date</th>
                                             <th>Items</th>
+                                            <th>Purpose</th>
                                             <th>Requested By</th>
                                             <th>Approved By</th>
                                             <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <!-- <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot> -->
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
+                                        <?php foreach($purchase_requests as $purchase_request) : ?>
+                                            <tr>
+                                                <td>
+                                                    <?php echo htmlspecialchars($purchase_request['pr_no']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($purchase_request['pr_date']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($purchase_request['lgu_id']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($purchase_request['office_id']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($purchase_request['item_id']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($purchase_request['pr_purpose']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($purchase_request['requested_by']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($purchase_request['approved_by']) ?>
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-pill badge-success">Approved</span>
+                                                    <span class="badge badge-pill badge-danger">Rejected</span>
+                                                    <span class="badge badge-pill badge-warning">Pending Approval</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex w-100">
+                                                        <a href="edit-supplier.php?supplier_id=<?php echo $supplier['supplier_id'] ?>" class="btn btn-warning">Edit</a>
+                                                        <form action="suppliers.php" method="POST" class="ml-1">
+                                                            <input type="hidden" name="id_to_delete" value="<?php echo $supplier['supplier_id'] ?>">
+                                                            <input type="submit" name="delete" value="Delete" class="btn btn-danger">
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

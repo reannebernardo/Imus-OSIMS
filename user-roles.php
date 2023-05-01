@@ -6,22 +6,22 @@
         
         $id_to_delete = mysqli_real_escape_string($conn, $_POST['id_to_delete']);
 
-        $sql = "DELETE FROM user WHERE user_id = $id_to_delete";
+        $sql = "DELETE FROM user_role WHERE role_id = $id_to_delete";
 
         if(mysqli_query($conn, $sql)) {
-            header('Location: users.php');
+            header('Location: user-roles.php');
             exit;
         } else {
             echo 'Query error: ' . mysqli_error($conn);
         }
     }
 
-    if(isset($_GET['user_id'])){
+    if(isset($_GET['role_id'])){
         
         // Escape SQL characters
-        $user_id = mysqli_real_escape_string($conn, $_GET['user_id']);
+        $role_id = mysqli_real_escape_string($conn, $_GET['role_id']);
         // Make SQL
-        $sql = "SELECT * FROM user WHERE user_id = $user_id";
+        $sql = "SELECT * FROM user_role WHERE role_id = $role_id";
         // Get the query result
         $result = mysqli_query($conn, $sql);
         // Fetch result in array format
@@ -33,13 +33,13 @@
     }
 
     // Write query for all users
-    $sql = 'SELECT * FROM user ORDER BY user_id';
+    $sql = 'SELECT * FROM user_role ORDER BY role_id';
 
     // Make the query and get results
     $result = mysqli_query($conn, $sql);
 
     // Fetch the resulting rows as an array
-    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $roles = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     // Free result from memory
     mysqli_free_result($result);
@@ -72,14 +72,14 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Users</h1>
+                    <h1 class="h3 mb-2 text-gray-800">User Roles</h1>
                     <p class="mb-4"></p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
-                            <a href="add-user.php" class="btn btn-success" role="button">Add User</a>
+                            <a href="add-role.php" class="btn btn-success" role="button">Add Role</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -88,31 +88,23 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($users as $user) : ?>
+                                        <?php foreach($roles as $role) : ?>
                                             <tr>
                                                 <td>
-                                                    <?php echo htmlspecialchars($user['user_id']) ?>
+                                                    <?php echo htmlspecialchars($role['role_id']) ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo htmlspecialchars($user['user_name']) ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($user['user_email']) ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($user['role_id']) ?>
+                                                    <?php echo htmlspecialchars($role['role_name']) ?>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex w-100">
-                                                        <a href="edit-user.php?user_id=<?php echo $user['user_id'] ?>" class="btn btn-warning">Edit</a>
-                                                        <form action="users.php" method="POST" class="ml-1">
-                                                            <input type="hidden" name="id_to_delete" value="<?php echo $user['user_id'] ?>">
+                                                        <a href="edit-role.php?role_id=<?php echo $role['role_id'] ?>" class="btn btn-warning">Edit</a>
+                                                        <form action="user-roles.php" method="POST" class="ml-1">
+                                                            <input type="hidden" name="id_to_delete" value="<?php echo $role['role_id'] ?>">
                                                             <input type="submit" name="delete" value="Delete" class="btn btn-danger">
                                                         </form>
                                                     </div>

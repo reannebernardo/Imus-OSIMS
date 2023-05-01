@@ -1,8 +1,46 @@
 <?php
 
-    if(isset($_GET['submit'])){
-        echo $_GET[''];
+    include 'config/db_connect.php';
+    
+    $lgu = '';
+    $errors = array('lgu-name' => '', 'office-name' => '', 'item-id' => '', 'purpose' => '', 'requested-by' => '');
+
+    $sql ="SELECT lgu_id, lgu_name FROM lgu";
+    $result = mysqli_query($conn, $sql);
+    if($result->num_rows> 0){
+        $lgus= mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
+
+    // POST check
+    if(isset($_POST['submit'] ) ) {
+        // Check LGU Name
+        if(empty($_POST['lgu-name']) ) {
+            $errors['lgu-name'] = 'An LGU is required. <br />';
+        } else {
+            $lgu_name = $_POST['lgu-name'];
+        }
+
+        // Page Redirect
+        if(! array_filter($errors) ) {
+
+            // reassign variables to prevent sql injection
+            $office_name = mysqli_real_escape_string($conn, $_POST['office-name']);
+
+            // Create SQL
+            $sql = "INSERT INTO office(office_name) 
+                    VALUES('$office_name')";
+
+            // Save to DB and check
+            if(mysqli_query($conn, $sql) ) {
+                header('Location: offices.php');
+                exit;
+            } else {
+                echo 'query error: ' . mysqli_error($conn);
+            }
+        }
+    }
+    // End of POST check
+
 ?>
 
 <!DOCTYPE html>
@@ -44,18 +82,21 @@
 
                                 <div class="mb-3">
                                     <label for="selectLGU" class="form-label">LGU</label>
-                                    <select class="form-select custom-select form-control form-control" aria-label="selectLGU" required>
+                                    <select class="form-select custom-select form-control form-control" aria-label="selectLGU" name="selectLGU">
                                         <option selected>Select LGU</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <?php 
+                                        foreach ($lgus as $lgu) {
+                                        ?>
+                                            <option value="<?php echo $lgu['lgu_id']?>"><?php echo $lgu['lgu_name']; ?> </option>
+                                            <?php 
+                                            }
+                                        ?>
                                     </select>
-                                    <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"> -->
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="selectOffice" class="form-label">Office</label>
-                                    <select class="form-select custom-select form-control form-control" aria-label="selectOffice" required>
+                                    <select class="form-select custom-select form-control form-control" aria-label="selectOffice">
                                         <option selected>Select Office</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
