@@ -2,7 +2,7 @@
 
     include 'config/db_connect.php';
     
-    $item_name = $item_unit = $item_desc = $unit_cost = $pr_purpose ='';
+    $item_name = $item_unit = $item_desc = $item_qty = $unit_cost = $pr_purpose ='';
     $errors = array('item-name' => '', 'item-unit' => '', 'item-desc' => '', 'item-qty' => '', 'unit-cost' => '', 'pr-purpose' => '');
 
     $sqlLgu ="SELECT lgu_id, lgu_name FROM lgu";
@@ -70,17 +70,22 @@
             $unit_cost = mysqli_real_escape_string($conn, $_POST['unit-cost']);
             $pr_purpose = mysqli_real_escape_string($conn, $_POST['pr-purpose']);
 
+            // multiply stock quantity and unit cost to get the total cost
+            $total_cost = $item_qty * $unit_cost;
+            
             // Create SQL
-            $sqlReqItem = "INSERT INTO requested_item(item_name, item_unit, item_desc, item_qty, unit_cost) 
-                VALUES('$item_name', '$item_unit', '$item_desc', '$item_qty', '$unit_cost')";
+            $sqlReqItem = "INSERT INTO requested_item(item_name, item_unit, item_desc, item_qty, unit_cost, total_cost) 
+                VALUES('$item_name', '$item_unit', '$item_desc', '$item_qty', '$unit_cost', '$total_cost')";
+
             mysqli_query($conn, $sqlReqItem);
+
             $item_id = mysqli_insert_id($conn);
+
             $sqlPR = "INSERT INTO purchase_request(lgu_id, office_id, item_id, pr_purpose) 
                 VALUES('$lgu_id', '$office_id', '$item_id', '$pr_purpose')";
 
             // Save to DB and check
-            if(mysqli_query($conn, $sqlReqItem)) {
-                mysqli_query($conn, $sqlPR);
+            if(mysqli_query($conn, $sqlPR)) {
                 header('Location: purchase-requests.php');
                 exit;
             } else {
@@ -159,43 +164,37 @@
 
                                     <div class="mb-3">
                                         <label for="inputName" class="form-label">Item Name</label>
-                                        <input type="text" class="form-control" name="item-name" id="inputName">
+                                        <input type="text" class="form-control" name="item-name" id="inputName" value="<?php echo $item_name ?>">
                                         <div class="mt-2 text-danger"> <?php echo $errors['item-name'] ?></div>
                                     </div>
                                     
                                     <div class="mb-3">
                                         <label for="inputUnit" class="form-label">Unit</label>
-                                        <input type="text" class="form-control" name="item-unit" id="inputUnit">
+                                        <input type="text" class="form-control" name="item-unit" id="inputUnit" value="<?php echo $item_unit ?>">
                                         <div class="mt-2 text-danger"> <?php echo $errors['item-unit'] ?></div>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="inputDesc" class="form-label">Item Description</label>
-                                        <textarea type="text" class="form-control" name="item-desc" id="inputDesc"></textarea>
+                                        <textarea type="text" class="form-control" name="item-desc" id="inputDesc" value="<?php echo $item_desc ?>"></textarea>
                                         <div class="mt-2 text-danger"> <?php echo $errors['item-desc'] ?></div>
                                     </div>
                                     
                                     <div class="mb-3">
                                         <label for="inputQuantity" class="form-label">Quantity</label>
-                                        <input type="text" class="form-control" name="item-qty" id="inputQuantity">
+                                        <input type="text" class="form-control" name="item-qty" id="inputQuantity" value="<?php echo $item_qty ?>">
                                         <div class="mt-2 text-danger"> <?php echo $errors['item-qty'] ?></div>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="inputUnitCost" class="form-label">Unit Cost</label>
-                                        <input type="text" class="form-control" name="unit-cost" id="inputUnitCost">
+                                        <input type="text" class="form-control" name="unit-cost" id="inputUnitCost" value="<?php echo $unit_cost ?>">
                                         <div class="mt-2 text-danger"> <?php echo $errors['unit-cost'] ?></div>
                                     </div>
 
-                                    <fieldset disabled>
-                                        <div class="mb-3">
-                                            <input type="hidden" class="form-control" name="total-cost" id="inputTotalCost">
-                                        </div>
-                                    </fieldset>
-
                                     <div class="mb-3">
                                         <label for="inputPurpose" class="form-label">Purpose</label>
-                                        <textarea type="text" class="form-control" name="pr-purpose" id="inputPurpose"></textarea>
+                                        <textarea type="text" class="form-control" name="pr-purpose" id="inputPurpose" value="<?php echo $pr_purpose ?>"></textarea>
                                         <div class="mt-2 text-danger"> <?php echo $errors['pr-purpose'] ?></div>
                                     </div>
 

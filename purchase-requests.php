@@ -6,7 +6,10 @@
         
         $id_to_delete = mysqli_real_escape_string($conn, $_POST['id_to_delete']);
 
-        $sql = "DELETE FROM purchase_request WHERE pr_no = $id_to_delete";
+        $sql = "DELETE purchase_request, requested_item FROM purchase_request 
+                INNER JOIN requested_item
+                ON purchase_request.pr_no = requested_item.item_id
+                WHERE purchase_request.item_id = $id_to_delete";
 
         if(mysqli_query($conn, $sql)) {
             header('Location: purchase-requests.php');
@@ -26,6 +29,22 @@
         $result = mysqli_query($conn, $sql);
         // Fetch result in array format
         $purchase_request = mysqli_fetch_assoc($result);
+        // Free result from memory
+        mysqli_free_result($result);
+        // Close DB connection
+        mysqli_close($conn);
+    }
+
+    if(isset($_GET['item_id'])){
+        
+        // Escape SQL characters
+        $item_id = mysqli_real_escape_string($conn, $_GET['item_id']);
+        // Make SQL
+        $sql = "SELECT * FROM requested_item WHERE item_id = $item_id";
+        // Get the query result
+        $result = mysqli_query($conn, $sql);
+        // Fetch result in array format
+        $requested_item = mysqli_fetch_assoc($result);
         // Free result from memory
         mysqli_free_result($result);
         // Close DB connection
@@ -121,21 +140,21 @@
                                                     <?php echo htmlspecialchars($purchase_request['pr_purpose']) ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo 'requested by' ?>
+                                                    <?php echo $user ?>
                                                 </td>
                                                 <td>
                                                     <?php echo htmlspecialchars($purchase_request['approved_by']) ?>
                                                 </td>
                                                 <td>
-                                                    <!-- <span class="badge badge-pill badge-success">Approved</span>
-                                                    <span class="badge badge-pill badge-danger">Rejected</span> -->
-                                                    <span class="badge badge-pill-md badge-warning">Pending Approval</span>
+                                                    <span class="badge badge-pill badge-success">Approved</span>
+                                                    <span class="badge badge-pill badge-danger">Rejected</span>
+                                                    <span class="badge badge-pill-md badge-warning">Pending</span>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex w-100">
-                                                        <a href="edit-pr.php?supplier_id=<?php echo $purchase_request['pr_no'] ?>" class="btn btn-warning">Edit</a>
+                                                        <a href="edit-pr.php?item_id=<?php echo $purchase_request['item_id'] ?>&pr_no=<?php echo $purchase_request['pr_no'] ?>" class="btn btn-warning">Edit</a>
                                                         <form action="purchase-requests.php" method="POST" class="ml-1">
-                                                            <input type="hidden" name="id_to_delete" value="<?php echo $purchase_request['pr_no'] ?>">
+                                                            <input type="hidden" name="id_to_delete" value="<?php echo $purchase_request['item_id'] ?>">
                                                             <input type="submit" name="delete" value="Delete" class="btn btn-danger">
                                                         </form>
                                                     </div>
