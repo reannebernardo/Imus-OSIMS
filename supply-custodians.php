@@ -41,11 +41,11 @@
     // Fetch the resulting rows as an array
     $scs = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-    // Free result from memory
-    mysqli_free_result($result);
+    // // Free result from memory
+    // mysqli_free_result($result);
 
-    // Close DB connection
-    mysqli_close($conn);
+    // // Close DB connection
+    // mysqli_close($conn);
 
 ?>
 
@@ -104,10 +104,26 @@
                                                     <?php echo htmlspecialchars($sc['sc_name']) ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo htmlspecialchars($sc['lgu_id']) ?>
+                                                    <?php 
+                                                        $lgu_id = htmlspecialchars($sc['lgu_id']);
+                                                        $sql = "SELECT lgu_name FROM lgu WHERE lgu_id = $lgu_id";
+                                                        $result = mysqli_query($conn, $sql);
+                                                        $lgu_names = mysqli_fetch_assoc($result);
+                                                        foreach($lgu_names as $lgu_name) {
+                                                            echo $lgu_name;
+                                                        }
+                                                    ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo htmlspecialchars($sc['office_id']) ?>
+                                                    <?php 
+                                                        $office_id = htmlspecialchars($sc['office_id']);
+                                                        $sql = "SELECT office_name FROM office WHERE office_id = $office_id";
+                                                        $result = mysqli_query($conn, $sql);
+                                                        $office_names = mysqli_fetch_assoc($result);
+                                                        foreach($office_names as $office_name) {
+                                                            echo $office_name;
+                                                        }
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex w-100">
