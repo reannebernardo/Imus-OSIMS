@@ -75,13 +75,6 @@
             // reassign variables to prevent sql injection
             $lgu_id = mysqli_real_escape_string($conn, $_POST['selectLGU']);;
             $stock_id = mysqli_real_escape_string($conn, $_POST['selectItem']);
-
-            // $sql ="SELECT stock_name, stock_desc, stock_unit FROM stock_item WHERE stock_id = $stock_id";
-            // $result = mysqli_query($conn, $sql);
-            // $stock_items= mysqli_fetch_assoc($resultItem);
-
-            // foreach($stock_items as $stock_item) {
-            // }
             
             $stock_name = mysqli_real_escape_string($conn, $stock_items['stock_name']);
             $stock_desc = mysqli_real_escape_string($conn, $stock_items['stock_desc']);

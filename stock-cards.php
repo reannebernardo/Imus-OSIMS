@@ -111,7 +111,6 @@
                                                 <td>
                                                     <?php 
                                                         $lgu_id = htmlspecialchars($stock_card['lgu_id']);
-                                                        echo $lgu_id;
                                                         $sql = "SELECT lgu_name FROM lgu WHERE lgu_id = $lgu_id";
                                                         $result = mysqli_query($conn, $sql);
                                                         $lgu_names = mysqli_fetch_assoc($result);
