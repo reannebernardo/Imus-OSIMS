@@ -118,7 +118,7 @@
                                 <hr class="hr" />
 
                                 <div class="mb-3">
-                                    <a class="btn btn-secondary" href="scs.php">Cancel</a>
+                                    <a class="btn btn-secondary" href="supply-custodians.php">Cancel</a>
                                     <input type="submit" name="submit" value="Submit" class="btn btn-success">
                                 </div>
 
