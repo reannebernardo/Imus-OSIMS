@@ -2,9 +2,6 @@
 
     include 'config/db_connect.php';
     
-    $pr_no = $card_no = $date_of_delivery = $amount ='';
-    $errors = array('pr-no' => '', 'card-no' => '', 'date-of-delivery' => '', 'amount' => '');
-
     $sqlLgu ="SELECT lgu_id, lgu_name FROM lgu";
     $resultLgu = mysqli_query($conn, $sqlLgu);
     if($resultLgu->num_rows> 0){
@@ -35,9 +32,24 @@
         $payments= mysqli_fetch_all($resultPayment, MYSQLI_ASSOC);
     }
 
-    // POST check
-    if(isset($_POST['submit'] ) ) {
+    // Check GET order ID parameter
+    if(isset($_GET['po_no']) ) {
         
+        // Escape SQL characters
+        $po_no = mysqli_real_escape_string($conn, $_GET['po_no']);
+        // Make SQL
+        $sql = "SELECT * FROM purchase_order WHERE po_no = $po_no";
+        // Get the query result
+        $result = mysqli_query($conn, $sql);
+        // Fetch result in array format
+        $purchase_order = mysqli_fetch_assoc($result);
+    }
+
+    $errors = array('pr-no' => '', 'card-no' => '', 'date-of-delivery' => '', 'amount' => '');
+
+    // POST check
+    if(isset($_POST['update'] ) ) {
+
         // Check PR No
         if(empty($_POST['pr-no']) ) {
             $errors['pr-no'] = 'A PR No is required. <br />';
@@ -76,17 +88,20 @@
             $date_of_delivery = mysqli_real_escape_string($conn, $_POST['date-of-delivery']);
             $payment_id = mysqli_real_escape_string($conn, $_POST['selectPayment']);
             $amount = mysqli_real_escape_string($conn, $_POST['amount']);
+
+
+            $id_to_update = mysqli_real_escape_string($conn, $_POST['id_to_update']);
             
-            // Create SQL
-            $sql = "INSERT INTO purchase_order(pr_no, lgu_id, card_no, supplier_id, mode_of_payment, place_of_delivery, date_of_delivery, payment_term, amount) 
-                VALUES('$pr_no', '$lgu_id', '$card_no', '$supplier_id', '$mode_id', '$warehouse_id', '$date_of_delivery', '$payment_id', '$amount')";
+            $sql = "UPDATE purchase_order
+                        SET pr_no = '$pr_no', lgu_id = '$lgu_id', card_no = '$card_no', supplier_id = '$supplier_id', mode_of_payment = '$mode_id', place_of_delivery = '$warehouse_id', date_of_delivery = '$date_of_delivery', payment_term = '$payment_id', amount = '$amount'
+                        WHERE po_no = $id_to_update";
 
             // Save to DB and check
             if(mysqli_query($conn, $sql)) {
                 header('Location: purchase-orders.php');
                 exit;
             } else {
-                echo 'query error: ' . mysqli_error($conn);
+                echo 'Query error: ' . mysqli_error($conn);
             }
         }
     }
@@ -96,7 +111,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+    
 <?php require 'templates/header.php'?>
 
 <body id="page-top">
@@ -112,7 +127,7 @@
             <!-- Main Content -->
             <div id="content">
 
-            <?php include 'templates/topbar.php'?>
+                <?php include 'templates/topbar.php'?>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -121,17 +136,17 @@
                     <h1 class="h3 mb-2 text-gray-800">Purchase Orders</h1>
                     <p class="mb-4">The PO is a form/document used by the agency/entity, addressed to a supplier, to deliver specific quantities of supplies/goods/pooperty subject to the terms and conditions contained in the PO.</p>
 
-                    <!-- Create PR Form-->
+                    <!-- Edit Purchase Order Form-->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-poimary">Create Purchase Order</h6>
+                            <h6 class="m-0 font-weight-bold text-poimary">Edit Purchase Order</h6>
                         </div>
                         <div class="card-body">
-                            <form class="needs-validation" action="create-po.php" method="POST">
+                            <form class="needs-validation" action="edit-po.php" method="POST">
 
-                                <div class="mb-3">
+                            <div class="mb-3">
                                     <label for="inputPR" class="form-label">PR No. *</label>
-                                    <input type="text" class="form-control" name="pr-no" id="inputPR" value="<?php echo $pr_no ?>">
+                                    <input type="text" class="form-control" name="pr-no" id="inputPR" value="<?php echo htmlspecialchars($purchase_order['pr_no']) ?>">
                                     <div class="mt-2 text-danger"> <?php echo $errors['pr-no'] ?></div>
                                 </div>
 
@@ -148,7 +163,7 @@
 
                                 <div class="mb-3">
                                     <label for="inputCard" class="form-label">Stock Card No. *</label>
-                                    <input type="text" class="form-control" name="card-no" id="inputCard" value="<?php echo $card_no ?>">
+                                    <input type="text" class="form-control" name="card-no" id="inputCard" value="<?php echo htmlspecialchars($purchase_order['card_no']) ?>">
                                     <div class="mt-2 text-danger"> <?php echo $errors['card-no'] ?></div>
                                 </div>
 
@@ -198,25 +213,30 @@
 
                                 <div class="mb-3">
                                     <label for="inputDate" class="form-label">Date of Delivery (Format: YYYY-MM-DD) *</label>
-                                    <input type="text" class="form-control" name="date-of-delivery" id="inputDate" value="<?php echo $date_of_delivery ?>">
+                                    <input type="text" class="form-control" name="date-of-delivery" id="inputDate" value="<?php echo htmlspecialchars($purchase_order['date_of_delivery']) ?>">
                                     <div class="mt-2 text-danger"> <?php echo $errors['date-of-delivery'] ?></div>
                                 </div>
                                 
                                 <div class="mb-3">
                                     <label for="inputAmount" class="form-label">Amount *</label>
-                                    <input type="text" class="form-control" name="amount" id="inputAmount" value="<?php echo $amount ?>">
+                                    <input type="text" class="form-control" name="amount" id="inputAmount" value="<?php echo htmlspecialchars($purchase_order['amount']) ?>">
                                     <div class="mt-2 text-danger"> <?php echo $errors['amount'] ?></div>
                                 </div>
-
+                                
                                 <hr class="hr" />
 
                                 <div class="mb-3">
-                                    <a class="btn btn-secondary" href="purchase-orders.php">Cancel</a>
-                                    <input type="submit" name="submit" value="Submit" class="btn btn-success">
-                                </div>
+                                        <a class="btn btn-secondary" href="purchase-orders.php">Cancel</a>
+                                        <form action="edit-po.php" method="POST" class="mr-1">
+                                            <input type="hidden" name="id_to_update" value="<?php echo $purchase_order['po_no'] ?>">
+                                            <input type="submit" name="update" value="Update" class="btn btn-success">
+                                        </form>
+                                    </div>
+
                             </form>
                         </div>
                     </div>
+                    <!-- End of Edit Purchase Order Form-->
 
                 </div>
                 <!-- /.container-fluid -->
