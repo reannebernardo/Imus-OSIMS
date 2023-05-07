@@ -91,6 +91,14 @@
                     <i class="fas fa-solid fa-warehouse"></i>
                     <span>Warehouses</span></a>
                 </a>
+                <a class="collapse-item" href="procurement-modes.php">
+                    <i class="fas fa-solid fa-receipt"></i>
+                    <span>Mode of Procurement</span></a>
+                </a>
+                <a class="collapse-item" href="payment-terms.php">
+                    <i class="fas fa-solid fa-coins"></i>
+                    <span>Payment Terms</span></a>
+                </a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">User Management</h6>
                 <a class="collapse-item" href="supply-custodians.php">
