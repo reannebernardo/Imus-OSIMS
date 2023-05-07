@@ -60,11 +60,11 @@
     // Fetch the resulting rows as an array
     $purchase_requests = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-    // Free result from memory
-    mysqli_free_result($result);
+    // // Free result from memory
+    // mysqli_free_result($result);
 
-    // Close DB connection
-    mysqli_close($conn);
+    // // Close DB connection
+    // mysqli_close($conn);
 
 ?>
 
@@ -128,13 +128,37 @@
                                                     <?php echo htmlspecialchars($purchase_request['pr_date']) ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo htmlspecialchars($purchase_request['lgu_id']) ?>
+                                                    <?php 
+                                                        $lgu_id = htmlspecialchars($purchase_request['lgu_id']);
+                                                        $sql = "SELECT lgu_name FROM lgu WHERE lgu_id = $lgu_id";
+                                                        $result = mysqli_query($conn, $sql);
+                                                        $lgu_names = mysqli_fetch_assoc($result);
+                                                        foreach($lgu_names as $lgu_name) {
+                                                            echo $lgu_name;
+                                                        }
+                                                    ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo htmlspecialchars($purchase_request['office_id']) ?>
+                                                    <?php 
+                                                        $office_id = htmlspecialchars($purchase_request['office_id']);
+                                                        $sql = "SELECT office_name FROM office WHERE office_id = $office_id";
+                                                        $result = mysqli_query($conn, $sql);
+                                                        $office_names = mysqli_fetch_assoc($result);
+                                                        foreach($office_names as $office_name) {
+                                                            echo $office_name;
+                                                        }
+                                                    ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo htmlspecialchars($purchase_request['item_id']) ?>
+                                                    <?php 
+                                                        $item_id = htmlspecialchars($purchase_request['item_id']);
+                                                        $sql = "SELECT item_name FROM requested_item WHERE item_id = $item_id";
+                                                        $result = mysqli_query($conn, $sql);
+                                                        $item_names = mysqli_fetch_assoc($result);
+                                                        foreach($item_names as $item_name) {
+                                                            echo $item_name;
+                                                        }
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <?php echo htmlspecialchars($purchase_request['pr_purpose']) ?>

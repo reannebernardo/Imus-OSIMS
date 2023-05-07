@@ -41,11 +41,11 @@
     // Fetch the resulting rows as an array
     $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-    // Free result from memory
-    mysqli_free_result($result);
+    // // Free result from memory
+    // mysqli_free_result($result);
 
-    // Close DB connection
-    mysqli_close($conn);
+    // // Close DB connection
+    // mysqli_close($conn);
 
 ?>
 <!DOCTYPE html>
@@ -106,7 +106,15 @@
                                                     <?php echo htmlspecialchars($user['user_email']) ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo ($user['role_id']) ?>
+                                                    <?php 
+                                                        $role_id = htmlspecialchars($user['role_id']);
+                                                        $sql = "SELECT role_name FROM user_role WHERE role_id = $role_id";
+                                                        $result = mysqli_query($conn, $sql);
+                                                        $roles = mysqli_fetch_assoc($result);
+                                                        foreach($roles as $role) {
+                                                            echo $role;
+                                                        }
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex w-100">
