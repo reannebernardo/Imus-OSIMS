@@ -1,10 +1,8 @@
 <?php
 
     include 'config/db_connect.php';
-    
-    $card_no = $issuance_quantity = $issuance_remarks = $ris_purpose = $ris_requested_by = $ris_approved_by = $ris_issued_by = $ris_received_by ='';
-    $errors = array('card-no' => '', 'issuance-quantity' => '', 'issuance-remarks' => '', 'ris-purpose' => '', 'ris-requested-by' => '', 'ris-approved-by' => '', 'ris-issued-by' => '', 'ris-received-by' => '');
 
+    // for options dropdown
     $sqlLgu ="SELECT lgu_id, lgu_name FROM lgu";
     $resultLgu = mysqli_query($conn, $sqlLgu);
     if($resultLgu->num_rows> 0){
@@ -28,10 +26,29 @@
     if($resultCard->num_rows> 0){
         $cards= mysqli_fetch_all($resultCard, MYSQLI_ASSOC);
     }
-    
-    // POST check
-    if(isset($_POST['submit'] ) ) {
+
+    // Check GET request ID parameter
+    if(isset($_GET['ris_no']) ) {
         
+        // Escape SQL characters
+        $ris_no = mysqli_real_escape_string($conn, $_GET['ris_no']);
+        // Make SQL
+        $sql = "SELECT * FROM ris WHERE ris_no = $ris_no";
+        // Get the query result
+        $result = mysqli_query($conn, $sql);
+        // Fetch result in array format
+        $ris = mysqli_fetch_assoc($result);
+
+        mysqli_free_result($result);
+        mysqli_close($conn);
+        
+    }
+
+    $errors = array('card-no' => '', 'issuance-quantity' => '', 'issuance-remarks' => '', 'ris-purpose' => '', 'ris-requested-by' => '', 'ris-approved-by' => '', 'ris-issued-by' => '', 'ris-received-by' => '');
+
+    // POST check
+    if(isset($_POST['update'] ) ) {
+
         // Check Issuance Quantity
         if(empty($_POST['issuance-quantity']) ) {
             $errors['issuance-quantity'] = 'A quantity is required. <br />';
@@ -75,11 +92,10 @@
             $ris_received_by = $_POST['ris-received-by'];
         }
 
-
         // Page Redirect
         if(! array_filter($errors) ) {
 
-            // reassign variables to poevent sql injection
+            // reassign variables to prevent sql injection
             $lgu_id = mysqli_real_escape_string($conn, $_POST['selectLGU']);
             $office_id = mysqli_real_escape_string($conn, $_POST['selectOffice']);
             $card_no = mysqli_real_escape_string($conn, $_POST['selectCard']);
@@ -90,17 +106,29 @@
             $ris_approved_by = mysqli_real_escape_string($conn, $_POST['ris-approved-by']);
             $ris_issued_by = mysqli_real_escape_string($conn, $_POST['ris-issued-by']);
             $ris_received_by = mysqli_real_escape_string($conn, $_POST['ris-received-by']);
-            
-            // Create SQL
-            $sql = "INSERT INTO ris(lgu_id, office_id, card_no, issuance_quantity, issuance_remarks, ris_purpose, ris_requested_by, ris_approved_by, ris_issued_by, ris_received_by) 
-                VALUES('$lgu_id', '$office_id', '$card_no', '$issuance_quantity', '$issuance_remarks', '$ris_purpose', '$ris_requested_by', '$ris_approved_by', '$ris_issued_by', '$ris_received_by')";
+
+            $id_to_update = mysqli_real_escape_string($conn, $_POST['id_to_update']);
+
+            $sql = "UPDATE ris
+                    SET 
+                    lgu_id = '$lgu_id', 
+                    office_id = '$office_id', 
+                    card_no = '$card_no', 
+                    issuance_quantity = '$issuance_quantity', 
+                    issuance_remarks = '$issuance_remarks', 
+                    ris_purpose = '$ris_purpose', 
+                    ris_requested_by = '$ris_requested_by', 
+                    ris_approved_by = '$ris_approved_by', 
+                    ris_issued_by = '$ris_issued_by', 
+                    ris_received_by = '$ris_received_by'
+                    WHERE ris_no = $id_to_update";
 
             // Save to DB and check
             if(mysqli_query($conn, $sql)) {
                 header('Location: ris.php');
                 exit;
             } else {
-                echo 'query error: ' . mysqli_error($conn);
+                echo 'Query error: ' . mysqli_error($conn);
             }
         }
     }
@@ -110,7 +138,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+    
 <?php require 'templates/header.php'?>
 
 <body id="page-top">
@@ -126,23 +154,23 @@
             <!-- Main Content -->
             <div id="content">
 
-            <?php include 'templates/topbar.php'?>
+                <?php include 'templates/topbar.php'?>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Requisition and Issuance</h1>
-                    <p class="mb-4">The RIS shall be used by the <b>Requisitioning Division/Office</b> to request supplies/goods/ equipment/property carried in stock and by the <b>Supply and/or Property Division/Unit</b> to issue the item/s requested.</p>
+                    <h1 class="h3 mb-2 text-gray-800">RIS</h1>
+                    <p class="mb-4"></p>
 
-                    <!-- Create PR Form-->
+                    <!-- Edit Stock Item Form-->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-poimary">Create RIS</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Edit RIS</h6>
                         </div>
                         <div class="card-body">
-                            <form class="needs-validation" action="create-ris.php" method="POST">
-                                
+                            <form class="needs-validation" action="edit-ris.php" method="POST">
+
                                 <div class="mb-3">
                                     <label for="selectLGU" class="form-label">LGU *</label>
                                     <select class="form-select custom-select form-control form-control" aria-label="selectLGU" name="selectLGU">
@@ -178,55 +206,59 @@
 
                                 <div class="mb-3">
                                     <label for="inputQty" class="form-label">Issuance Quantity *</label>
-                                    <input type="text" class="form-control" name="issuance-quantity" id="inputQty" value="<?php echo $issuance_quantity ?>">
+                                    <input type="text" class="form-control" name="issuance-quantity" id="inputQty" value="<?php echo htmlspecialchars($ris['issuance_quantity']) ?>">
                                     <div class="mt-2 text-danger"> <?php echo $errors['issuance-quantity'] ?></div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="inputRemarks" class="form-label">Issuance Remarks *</label>
-                                    <input type="text" class="form-control" name="issuance-remarks" id="inputRemarks" value="<?php echo $issuance_remarks ?>">
+                                    <input type="text" class="form-control" name="issuance-remarks" id="inputRemarks" value="<?php echo htmlspecialchars($ris['issuance_remarks']) ?>">
                                     <div class="mt-2 text-danger"> <?php echo $errors['issuance-remarks'] ?></div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="inputPurpose" class="form-label">RIS Purpose *</label>
-                                    <input type="text" class="form-control" name="ris-purpose" id="inputPurpose" value="<?php echo $ris_purpose ?>">
+                                    <input type="text" class="form-control" name="ris-purpose" id="inputPurpose" value="<?php echo htmlspecialchars($ris['ris_purpose']) ?>">
                                     <div class="mt-2 text-danger"> <?php echo $errors['ris-purpose'] ?></div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="inputRequestedBy" class="form-label">RIS Requested By *</label>
-                                    <input type="text" class="form-control" name="ris-requested-by" id="inputRequestedBy" value="<?php echo $ris_requested_by ?>">
+                                    <input type="text" class="form-control" name="ris-requested-by" id="inputRequestedBy" value="<?php echo htmlspecialchars($ris['ris_requested_by']) ?>">
                                     <div class="mt-2 text-danger"> <?php echo $errors['ris-requested-by'] ?></div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="inputIssuedBy" class="form-label">RIS Issued By *</label>
-                                    <input type="text" class="form-control" name="ris-issued-by" id="inputIssuedBy" value="<?php echo $ris_issued_by ?>">
+                                    <input type="text" class="form-control" name="ris-issued-by" id="inputIssuedBy" value="<?php echo htmlspecialchars($ris['ris_issued_by']) ?>">
                                     <div class="mt-2 text-danger"> <?php echo $errors['ris-issued-by'] ?></div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="inputApprovedBy" class="form-label">RIS Approved By *</label>
-                                    <input type="text" class="form-control" name="ris-approved-by" id="inputApprovedBy" value="<?php echo $ris_approved_by ?>">
+                                    <input type="text" class="form-control" name="ris-approved-by" id="inputApprovedBy" value="<?php echo htmlspecialchars($ris['ris_approved_by']) ?>">
                                     <div class="mt-2 text-danger"> <?php echo $errors['ris-approved-by'] ?></div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="inputReceivedBy" class="form-label">RIS Received By *</label>
-                                    <input type="text" class="form-control" name="ris-received-by" id="inputReceivedBy" value="<?php echo $ris_received_by ?>">
+                                    <input type="text" class="form-control" name="ris-received-by" id="inputReceivedBy" value="<?php echo htmlspecialchars($ris['ris_received_by']) ?>">
                                     <div class="mt-2 text-danger"> <?php echo $errors['ris-received-by'] ?></div>
                                 </div>
-
+                                
                                 <hr class="hr" />
 
                                 <div class="mb-3">
                                     <a class="btn btn-secondary" href="ris.php">Cancel</a>
-                                    <input type="submit" name="submit" value="Submit" class="btn btn-success">
+                                    <form action="edit-ris.php" method="POST" class="mr-1">
+                                        <input type="hidden" name="id_to_update" value="<?php echo $ris['ris_no'] ?>">
+                                        <input type="submit" name="update" value="Update" class="btn btn-success">
+                                    </form>
                                 </div>
                             </form>
                         </div>
                     </div>
+                    <!-- End of Edit Stock Item Form-->
 
                 </div>
                 <!-- /.container-fluid -->

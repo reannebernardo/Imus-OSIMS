@@ -1,10 +1,61 @@
+<?php
+
+    include 'config/db_connect.php';
+
+    if(isset($_POST['delete']) ) {
+        
+        $id_to_delete = mysqli_real_escape_string($conn, $_POST['id_to_delete']);
+
+        $sql = "DELETE FROM ris WHERE ris_no = $id_to_delete";
+
+        if(mysqli_query($conn, $sql)) {
+            header('Location: ris.php');
+            exit;
+        } else {
+            echo 'Query error: ' . mysqli_error($conn);
+        }
+    }
+
+    if(isset($_GET['ris_no'])){
+        
+        // Escape SQL characters
+        $ris_no = mysqli_real_escape_string($conn, $_GET['ris_no']);
+        // Make SQL
+        $sql = "SELECT * FROM ris WHERE ris_no = $ris_no";
+        // Get the query result
+        $result = mysqli_query($conn, $sql);
+        // Fetch result in array format
+        $ris = mysqli_fetch_assoc($result);
+        // Free result from memory
+        mysqli_free_result($result);
+        // Close DB connection
+        mysqli_close($conn);
+    }
+
+    // Write query for all purchase orders
+    $sql = 'SELECT * FROM ris ORDER BY ris_no';
+
+    // Make the query and get results
+    $result = mysqli_query($conn, $sql);
+
+    // Fetch the resulting rows as an array
+    $riss = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    // // Free result from memory
+    // mysqli_free_result($result);
+
+    // // Close DB connection
+    // mysqli_close($conn);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     
 <?php require 'templates/header.php'?>
 
 <body id="page-top">
-
+    
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -16,7 +67,7 @@
             <!-- Main Content -->
             <div id="content">
 
-            <?php include 'templates/topbar.php'?>
+                <?php include 'templates/topbar.php'?>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -28,7 +79,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
+                            <!-- <h6 class="m-0 font-weight-bold text-poimary">DataTables Example</h6> -->
                             <a href="create-ris.php" class="btn btn-success" role="button">Create RIS</a>
                         </div>
                         <div class="card-body">
@@ -51,71 +102,72 @@
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <!-- <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot> -->
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>$320,800</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>$170,750</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>$433,060</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning">Edit</button>
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
+                                        <?php foreach($riss as $ris) : ?>
+                                            <tr>
+                                                <td>
+                                                    <?php echo htmlspecialchars($ris['ris_no']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php 
+                                                        $lgu_id = htmlspecialchars($ris['lgu_id']);
+                                                        $sql = "SELECT lgu_name FROM lgu WHERE lgu_id = $lgu_id";
+                                                        $result = mysqli_query($conn, $sql);
+                                                        $lgu_names = mysqli_fetch_assoc($result);
+                                                        foreach($lgu_names as $lgu_name) {
+                                                            echo $lgu_name;
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php 
+                                                        $office_id = htmlspecialchars($ris['office_id']);
+                                                        $sql = "SELECT office_name FROM office WHERE office_id = $office_id";
+                                                        $result = mysqli_query($conn, $sql);
+                                                        $office_names = mysqli_fetch_assoc($result);
+                                                        foreach($office_names as $office_name) {
+                                                            echo $office_name;
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($ris['ris_date']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($ris['card_no']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($ris['issuance_quantity']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($ris['issuance_remarks']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($ris['ris_purpose']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($ris['ris_requested_by']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($ris['ris_approved_by']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($ris['ris_issued_by']) ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($ris['ris_received_by']) ?>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex w-100">
+                                                        <a href="edit-ris.php?ris_no=<?php echo $ris['ris_no'] ?>" class="btn btn-warning">Edit</a>
+                                                        <form action="ris.php" method="POST" class="ml-1">
+                                                            <input type="hidden" name="id_to_delete" value="<?php echo $ris['ris_no'] ?>">
+                                                            <input type="submit" name="delete" value="Delete" class="btn btn-danger">
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

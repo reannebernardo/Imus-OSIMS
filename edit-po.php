@@ -93,7 +93,16 @@
             $id_to_update = mysqli_real_escape_string($conn, $_POST['id_to_update']);
             
             $sql = "UPDATE purchase_order
-                        SET pr_no = '$pr_no', lgu_id = '$lgu_id', card_no = '$card_no', supplier_id = '$supplier_id', mode_of_payment = '$mode_id', place_of_delivery = '$warehouse_id', date_of_delivery = '$date_of_delivery', payment_term = '$payment_id', amount = '$amount'
+                        SET 
+                        pr_no = '$pr_no', 
+                        lgu_id = '$lgu_id', 
+                        card_no = '$card_no', 
+                        supplier_id = '$supplier_id', 
+                        mode_of_payment = '$mode_id', 
+                        place_of_delivery = '$warehouse_id', 
+                        date_of_delivery = '$date_of_delivery', 
+                        payment_term = '$payment_id', 
+                        amount = '$amount'
                         WHERE po_no = $id_to_update";
 
             // Save to DB and check
