@@ -63,14 +63,13 @@
     
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+            aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-solid fa-wrench"></i>
             <span>Utilities</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Pages</h6>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-light py-2 collapse-inner rounded">
                 <a class="collapse-item" href="lgus.php">
                     <i class="fas fa-solid fa-landmark"></i>
                     <span>LGUs</span>
@@ -99,8 +98,18 @@
                     <i class="fas fa-solid fa-coins"></i>
                     <span>Payment Terms</span></a>
                 </a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">User Management</h6>
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
+            aria-expanded="true" aria-controls="collapseUser">
+            <i class="fas fa-solid fa-user"></i>
+            <span>User Management</span>
+        </a>
+        <div id="collapseUser" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-light py-2 collapse-inner rounded">
                 <a class="collapse-item" href="supply-custodians.php">
                     <i class="fas fa-solid fa-users"></i>
                     <span>Supply Custodians</span></a>
@@ -116,8 +125,6 @@
             </div>
         </div>
     </li>
-
-
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
