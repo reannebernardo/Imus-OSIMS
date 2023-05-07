@@ -60,46 +60,56 @@
             <i class="fas fa-solid fa-chart-line"></i>
             <span>Generate Report</span></a>
     </li>
+    
+    <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="lgus.php">
-            <i class="fas fa-solid fa-landmark"></i>
-            <span>LGUs</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-solid fa-wrench"></i>
+            <span>Utilities</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Pages</h6>
+                <a class="collapse-item" href="lgus.php">
+                    <i class="fas fa-solid fa-landmark"></i>
+                    <span>LGUs</span>
+                </a>
+                <a class="collapse-item" href="offices.php">
+                    <i class="fas fa-solid fa-building"></i>
+                    <span>Offices</span></a>
+                </a>
+                <a class="collapse-item" href="stock-items.php">
+                    <i class="fas fa-solid fa-truck"></i>
+                    <span>Stock Items</span></a>
+                </a>
+                <a class="collapse-item" href="suppliers.php">
+                    <i class="fas fa-solid fa-truck"></i>
+                    <span>Suppliers</span></a>
+                </a>
+                <a class="collapse-item" href="warehouses.php">
+                    <i class="fas fa-solid fa-warehouse"></i>
+                    <span>Warehouses</span></a>
+                </a>
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">User Management</h6>
+                <a class="collapse-item" href="supply-custodians.php">
+                    <i class="fas fa-solid fa-users"></i>
+                    <span>Supply Custodians</span></a>
+                </a>
+                <a class="collapse-item" href="users.php">
+                    <i class="fas fa-solid fa-users"></i>
+                    <span>Users</span></a>
+                </a>
+                <a class="collapse-item" href="user-roles.php">
+                    <i class="fas fa-solid fa-users"></i>
+                    <span>User Roles</span></a>
+                </a>
+            </div>
+        </div>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="offices.php">
-            <i class="fas fa-solid fa-building"></i>
-            <span>Offices</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="stock-items.php">
-            <i class="fas fa-solid fa-truck"></i>
-            <span>Stock Items</span></a>
-        </li>
-    <li class="nav-item">
-        <a class="nav-link" href="suppliers.php">
-            <i class="fas fa-solid fa-truck"></i>
-            <span>Suppliers</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="warehouses.php">
-            <i class="fas fa-solid fa-warehouse"></i>
-            <span>Warehouses</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="supply-custodians.php">
-            <i class="fas fa-solid fa-users"></i>
-            <span>Supply Custodians</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="users.php">
-            <i class="fas fa-solid fa-users"></i>
-            <span>Users</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="user-roles.php">
-            <i class="fas fa-solid fa-users"></i>
-            <span>User Roles</span></a>
-    </li>
+
+
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
