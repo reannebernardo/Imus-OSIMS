@@ -17,11 +17,11 @@
     </div>
 
     <!-- Nav Item - Dashboard -->
-    <!-- <li class="nav-item">
+    <li class="nav-item">
         <a class="nav-link" href="index.php">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-    </li> -->
+            <i class="fas fa-search"></i>
+            <span>Search</span></a>
+    </li>
     <!-- <li class="nav-item">
         <a class="nav-link" href="for-approval.php">
             <i class="fas fa-fw fa-check"></i>
