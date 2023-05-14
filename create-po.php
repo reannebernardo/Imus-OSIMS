@@ -78,7 +78,7 @@
             $amount = mysqli_real_escape_string($conn, $_POST['amount']);
             
             // Create SQL
-            $sql = "INSERT INTO purchase_order(pr_no, lgu_id, card_no, supplier_id, mode_of_payment, place_of_delivery, date_of_delivery, payment_term, amount) 
+            $sql = "INSERT INTO purchase_order(pr_no, lgu_id, card_no, supplier_id, mode_of_payment, wr_code, date_of_delivery, payment_term, amount) 
                 VALUES('$pr_no', '$lgu_id', '$card_no', '$supplier_id', '$mode_id', '$warehouse_id', '$date_of_delivery', '$payment_id', '$amount')";
 
             // Save to DB and check
@@ -175,7 +175,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="selectWarehouse" class="form-label">Place of Delivery *</label>
+                                    <label for="selectWarehouse" class="form-label">Place of Delivery (Warehouse) *</label>
                                     <select class="form-select custom-select form-control form-control" aria-label="selectWarehouse" name="selectWarehouse">
                                         <?php 
                                         foreach ($warehouses as $warehouse) {

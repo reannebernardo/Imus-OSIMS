@@ -99,7 +99,7 @@
                         card_no = '$card_no', 
                         supplier_id = '$supplier_id', 
                         mode_of_payment = '$mode_id', 
-                        place_of_delivery = '$warehouse_id', 
+                        wr_code = '$warehouse_id', 
                         date_of_delivery = '$date_of_delivery', 
                         payment_term = '$payment_id', 
                         amount = '$amount'
@@ -199,7 +199,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="selectWarehouse" class="form-label">Place of Delivery *</label>
+                                    <label for="selectWarehouse" class="form-label">Place of Delivery (Warehouse) *</label>
                                     <select class="form-select custom-select form-control form-control" aria-label="selectWarehouse" name="selectWarehouse">
                                         <?php 
                                         foreach ($warehouses as $warehouse) {

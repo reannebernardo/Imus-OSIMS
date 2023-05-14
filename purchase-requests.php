@@ -114,7 +114,6 @@
                                             <th>Purpose</th>
                                             <th>Requested By</th>
                                             <th>Approved By</th>
-                                            <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -168,11 +167,6 @@
                                                 </td>
                                                 <td>
                                                     <?php echo htmlspecialchars($purchase_request['approved_by']) ?>
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-pill badge-success">Approved</span>
-                                                    <span class="badge badge-pill badge-danger">Rejected</span>
-                                                    <span class="badge badge-pill-md badge-warning">Pending</span>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex w-100">

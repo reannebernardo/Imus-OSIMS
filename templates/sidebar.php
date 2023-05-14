@@ -17,16 +17,16 @@
     </div>
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="index.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
-    </li>
-    <li class="nav-item">
+    </li> -->
+    <!-- <li class="nav-item">
         <a class="nav-link" href="for-approval.php">
             <i class="fas fa-fw fa-check"></i>
             <span>For Approval <sup class="badge badge-pill badge-danger">2</sup></span></a>
-    </li>
+    </li> -->
     <li class="nav-item">
         <a class="nav-link" href="purchase-requests.php">
             <i class="fas fa-solid fa-cart-plus"></i>
@@ -54,13 +54,7 @@
     <div class="sidebar-heading">
         Administration
     </div>
-    
-    <li class="nav-item">
-        <a class="nav-link" href="report.php">
-            <i class="fas fa-solid fa-chart-line"></i>
-            <span>Generate Report</span></a>
-    </li>
-    
+        
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"

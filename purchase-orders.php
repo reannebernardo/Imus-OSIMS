@@ -41,7 +41,7 @@
     // Fetch the resulting rows as an array
     $purchase_orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-    // // Free result from memory
+    // Free result from memory
     // mysqli_free_result($result);
 
     // // Close DB connection
@@ -153,7 +153,7 @@
                                                 </td>
                                                 <td>
                                                     <?php 
-                                                        $wr_code = htmlspecialchars($purchase_order['place_of_delivery']);
+                                                        $wr_code = htmlspecialchars($purchase_order['wr_code']);
                                                         $sql = "SELECT wr_name FROM warehouse WHERE wr_code = $wr_code";
                                                         $result = mysqli_query($conn, $sql);
                                                         $warehouse_names = mysqli_fetch_assoc($result);
