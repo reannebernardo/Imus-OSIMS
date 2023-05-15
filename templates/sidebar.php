@@ -3,13 +3,15 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-        <img src="img/logo.ico" alt="City of Imus Logo">
+        <div class="sidebar-brand-icon">
+            <img src="img/logo.png" alt="City of Imus Logo" width="50" height="50">
+        </div>
         <!-- <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/logo.png" alt="..."> -->
-        <div class="sidebar-brand-text mx-3">City of Imus</div>
+        <!-- <div class="sidebar-brand-text mx-3">City of Imus</div> -->
     </a>
 
     <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+    <!-- <hr class="sidebar-divider my-0"> -->
 
     <!-- Heading -->
     <div class="sidebar-heading mt-3">
