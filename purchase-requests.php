@@ -74,7 +74,7 @@
 <?php require 'templates/header.php'?>
 
 <body id="page-top">
-    
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -98,12 +98,9 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">                            
-                            <form class="d-none d-sm-inline-block form-inline mr-2 my-2 my-md-0 navbar-search" action="purchase-requests.php" method="POST">
+                            <form class="d-none d-sm-inline-block form-inline mr-2 my-2 my-md-0 navbar-search" action="livesearch.php" method="POST">
                                 <div class="input-group">
-                                    <input type="text" class="form-control bg-white border-1 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <input type="submit" name="submit" value="Search" class="btn btn-info">
-                                    </div>
+                                    <input type="text" class="form-control bg-white border-1 small" id="live_search" autocomplete="off" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                                 </div>
                             </form>
                             
@@ -111,6 +108,9 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+
+                                <div id="searchresult"></div>
+
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -210,7 +210,30 @@
     <?php include 'templates/scroll-to-top.php'?>
     <?php require 'templates/logout-modal.php'?>
     <?php require 'templates/plugins.php'?>
+    
+    <!-- <script type="text/javascript">
+        $(document).ready(function(){
+            $("#live_search").keyup(function(){
 
+                var input = $(this).val();
+                // alert(input);
+
+                if(input != ""){
+                    $.ajax({
+                        url: "livesearch.php",
+                        method: "POST",
+                        data:{input:input},
+
+                        success:function(data){
+                            $("#searchresult").html(data);
+                        }
+                    });
+                } else {
+                    $("#searchresult").css("display", "none");
+                }
+            });
+        });
+    </script> -->
 </body>
 
 </html>
