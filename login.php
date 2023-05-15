@@ -1,27 +1,68 @@
 <?php
 
+    include 'config/db_connect.php';
+
+    $errors = array('email' => '', 'password' => '', 'submit' => '');
+
     if(isset($_POST['submit'])){
-        // echo htmlspecialchars($_POST['email']);
-        // echo htmlspecialchars($_POST['password']);
 
         // Check Email
         if(empty($_POST['email'])){
-            echo 'A email is required <br />';
+            $errors['email'] = 'An email is required. <br />';
         } else {
-            // echo htmlspecialchars($_POST['company-name']);
             $email = $_POST['email'];
             if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                echo 'Email must be a valid email address';
+                $errors['email'] = 'Email must be a valid email address. <br />';
             }
         }
 
         // Check Password
         if(empty($_POST['password'])){
-            echo 'A password is required <br />';
-        } else {
-            
+            $errors['password'] = 'A password is required. <br />';
         }
+    }
 
+    if($_SERVER["REQUEST_METHOD"] == 'POST') {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $sql = "SELECT * FROM user WHERE user_email = '".$email."' AND user_password = '".$password."' ";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_array($result);
+        print_r($row);
+        echo $row;
+
+        switch(isset($row['role_id'])) {
+            case 1:
+                $_SESSION['email']=$email;
+                $_SESSION['role_id']="1";
+                header("Location: index.php");
+                break;
+            case 2:
+                $_SESSION['email']=$email;
+                $_SESSION['role_id']="2";
+                header("Location: index.php");
+                break;
+            case 3:
+                $_SESSION['email']=$email;
+                $_SESSION['role_id']="3";
+                header("Location: index.php");
+                break;
+            case 4:
+                $_SESSION['email']=$email;
+                $_SESSION['role_id']="4";
+                header("Location: index.php");
+                break;
+            case 5:
+                $_SESSION['email']=$email;
+                $_SESSION['role_id']="5";
+                header("Location: index.php");
+                break;
+            default:
+                $message= "username or password do not match";
+
+                $_SESSION['loginMessage']=$message;
+        }
     }
 ?>
 
@@ -50,14 +91,17 @@
                                         <h3 class="h6 text-gray-900 mb-4">Office Supplies Inventory Management System</h3>
                                         <h5 class="h5 text-gray-900 mb-3">Welcome Back!</h5>
                                     </div>
-                                    <form class="user" action="login.php" method="POST">
+                                    <form class="user" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address">
+                                            <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Email Address" name="email" autocomplete="off">
+                                            <div class="mt-2 text-danger"> <?php echo $errors['email'] ?></div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" id="inputPassword" placeholder="Enter Password">
+                                            <input type="password" class="form-control" placeholder="Enter Password" name="password" autocomplete="off">
+                                            <div class="mt-2 text-danger"> <?php echo $errors['password'] ?></div>
                                         </div>
-                                        <input type="submit" name="submit" value="Login" class="btn btn-primary btn-user btn-block">
+                                        <div class="mt-2 text-danger"> <?php echo $errors['submit'] ?></div>
+                                        <input type="submit" name="submit" value="Login" class="btn btn-primary btn-block">
                                     </form>
                                     <hr>
                                     <div class="text-center mb-2">
