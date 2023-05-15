@@ -100,7 +100,7 @@
                         <div class="card-header py-3">                            
                             <form class="d-none d-sm-inline-block form-inline mr-2 my-2 my-md-0 navbar-search" action="purchase-requests.php" method="POST">
                                 <div class="input-group">
-                                    <input type="text" class="form-control bg-white border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                    <input type="text" class="form-control bg-white border-1 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <input type="submit" name="submit" value="Search" class="btn btn-info">
                                     </div>
